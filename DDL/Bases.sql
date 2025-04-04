@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS escaladadb;
 CREATE DATABASE escaladadb;
 
 USE escaladadb;
