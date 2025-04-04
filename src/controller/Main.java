@@ -2,6 +2,7 @@ package controller;
 
 import view.View;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -41,7 +42,10 @@ public class Main {
             if (n < min || n > max) throw new NumberFormatException();
         }
         catch (NumberFormatException e){
-            View.mostrarMsg("El valor introducido no es valido entre les opciones.");
+            View.mostrarMsg("El valor introducido no es valido.");
+        }
+        catch (InputMismatchException e){
+            View.mostrarMsg("El valor introducido esta fuera de las opciones.");
         }
 
         return n;
