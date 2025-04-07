@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class MySQLConnection {
     public static Statement mysqlConnection(){
-        String url = "jdbc:mysql://127.0.0.1:3306/escaladadb", user = "root", passw = "";
+        String url = "jdbc:mysql://localhost:3306/escaladadb", user = "root", passw = "bloste_escalada";
 
         Connection con = null;
         Statement stmt = null;
