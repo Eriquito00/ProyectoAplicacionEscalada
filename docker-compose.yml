@@ -1,0 +1,18 @@
+services:
+    mysql:
+      image: mysql:8.0
+      container_name: mysql_escalada
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: bloste_escalada
+        MYSQL_DATABASE: escaladadb
+        MYSQL_USER: root
+        MYSQL_PASSWORD: bloste_escalada
+      ports:
+        - "3306:3306"
+      volumes:
+        - mysql_data:/var/lib/mysql
+        - ./docker:/docker-entrypoint-initdb.d
+
+volumes:
+  mysql_data:

@@ -74,3 +74,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# Archivos de volúmenes y configuraciones locales de Docker
+/mysql_data/
