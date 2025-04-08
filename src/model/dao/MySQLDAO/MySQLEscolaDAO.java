@@ -1,4 +1,94 @@
 package model.dao.MySQLDAO;
 
-public class MySQLEscolaDAO {
+import model.classes.Escola;
+import model.dao.interfaces.EscolaDAO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class MySQLEscolaDAO implements EscolaDAO {
+
+    private final Connection conn;
+
+    public MySQLEscolaDAO(Connection conn) {
+        this.conn = conn;
+    }
+
+
+    public boolean existeEscola(String nom) throws SQLException {
+        String query = "SELECT COUNT(escola_id) AS num_escoles " +
+                       "FROM escoles " +
+                       "WHERE nom = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, nom);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("num_escoles") > 0;
+            } else {
+                return false; // Escola no trobada
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Error en la consulta
+        }
+    }
+
+    // CRUD
+
+    // TODO: TESTEAR ESTO SI O SI ERIC, POR DIOS, ARREGLA UN POCO ESTO, ES DEMASIADO TOCHA
+    public void create(Escola escola) throws SQLException {
+
+        // Comprovar que la connexió no és null
+        if (conn == null) {
+            throw new SQLException("La connexió a la base de dades és null");
+        }
+
+        // Implementar la lógica para crear una nueva escuela en la base de datos
+        // Hace falta comprovar que la poblacio de la escola existe en la bbdd
+        int poblacioId = new MySQLPoblacionsDAO(conn).getIdPoblacioByNom(escola.getPoblacio());
+        // Si la poblacio no existeix, llançar una excepció
+        if (poblacioId == -1) throw new SQLException("La població no existeix a la base de dades");
+
+        // Si la poblacio existeix, continuar amb la inserció
+        String query = "INSERT INTO escoles (poblacio_id, nom, aproximacio, num_vies, popularitat, restriccions) VALUES (?, ?, ?, ?, ?, ?)";
+
+        // Preparar la consulta SQL
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, poblacioId);
+        pstmt.setString(2, escola.getNom());
+
+        if (escola.getAproximacio().equals("")) {
+            pstmt.setString(3, null); // Aproximacio no es obligatori
+        } else {
+            pstmt.setString(3, escola.getAproximacio());
+        }
+
+        pstmt.setInt(4, escola.getNum_vies());
+        pstmt.setString(5, escola.getPopularitat());
+
+        if (escola.getRestriccions().equals("")) {
+            pstmt.setString(6, null); // Restriccions no es obligatori
+        } else {
+            pstmt.setString(6, escola.getRestriccions());
+        }
+
+        // Ejecutar la consulta
+        pstmt.executeUpdate();
+    }
+
+    public Escola read(Integer id) {
+        // Implementar la lógica para leer una escuela de la base de datos por su ID
+        return null;
+    }
+
+    public void update(Escola escola) {
+        // Implementar la lógica para actualizar una escuela en la base de datos
+    }
+
+    public void delete(Integer id) {
+        // Implementar la lógica para eliminar una escuela de la base de datos por su ID
+    }
 }
