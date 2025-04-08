@@ -12,7 +12,7 @@ public class Escola {
         this.poblacio = poblacio;
         this.nom = nom;
         this.aproximacio = aproximacio;
-        this.num_vies = 0;
+        this.num_vies = 0; // Valor default
         this.popularitat = popularitat;
         this.restriccions = restriccions;
     }
