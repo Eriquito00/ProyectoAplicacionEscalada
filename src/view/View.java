@@ -11,4 +11,12 @@ public class View {
             System.out.println(i + ": " + opciones[i - 1]);
         }
     }
+
+    public static void mostrartitulo(String titulo){
+        String r = "";
+        for (int i = 0; i < titulo.length(); i++){
+            r += "-";
+        }
+        System.out.println(r + "\n" + titulo.toUpperCase() + "\n" + r);
+    }
 }

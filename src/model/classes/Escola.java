@@ -8,11 +8,11 @@ public class Escola {
     private String popularitat;
     private String restriccions;
 
-    public Escola(String poblacio, String nom, String aproximacio, int num_vies, String popularitat, String restriccions) {
+    public Escola(String poblacio, String nom, String aproximacio, String popularitat, String restriccions) {
         this.poblacio = poblacio;
         this.nom = nom;
         this.aproximacio = aproximacio;
-        this.num_vies = num_vies;
+        this.num_vies = 0;
         this.popularitat = popularitat;
         this.restriccions = restriccions;
     }
