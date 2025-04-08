@@ -1,8 +1,8 @@
 package controller;
 
+import controller.menus.MenuClasses;
 import model.connection.MySQLConnection;
 import view.View;
-import utils.Test;
 
 import java.sql.*;
 import java.util.InputMismatchException;
@@ -10,43 +10,57 @@ import java.util.Scanner;
 
 public class Main {
     public static Scanner scan = new Scanner(System.in);
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         boolean seguir = true;
 
         View.mostrarMsg("Bienvenido al gestionador de Vias de Escalada!");
 
         while (seguir){
 
-            View.mostrarMenu("A","B","C","D");
-            int opcion = aplicaOpcio(scan, 1, 4);
+            View.mostrartitulo("APLICACION DE GESTION DE ESCALADA");
+            View.mostrarMenu("Crear","Actualizar","Borrar","Consultar","Consultas Avanzadas","Salir");
+            int opcion = aplicaOpcio(scan, 1, 6);
 
             try {
                 Connection c = MySQLConnection.mysqlConnection();
 
                 switch (opcion){
                     case 1:
-                        View.mostrarMsg("1");
-                        Test.pruebaConexion(c);
+                        MenuClasses.menuClasses(opcion, "CREAR");
                         break;
                     case 2:
-                        View.mostrarMsg("2");
+                        MenuClasses.menuClasses(opcion, "ACTUALIZAR");
                         break;
                     case 3:
-                        View.mostrarMsg("3");
+                        MenuClasses.menuClasses(opcion, "BORRAR");
                         break;
                     case 4:
-                        View.mostrarMsg("salir");
+                        MenuClasses.menuClasses(opcion, "CONSULTAS");
+                        break;
+                    case 5:
+                        MenuClasses.menuConsultasAvanzadas("CONSULTAS AVANZADAS");
+                        break;
+                    case 6:
                         seguir = false;
                         c.close();
+                        View.mostrarMsg("Gracias por usar la aplicacion. Nos vemos pronto...");
                         break;
                 }
             }
-            catch (RuntimeException | SQLException e) {
-                View.mostrarMsg(e.getMessage());
+            catch (SQLException e){
+                seguir = false;
+                View.mostrarMsg("Error en la conexion con la base de datos.");
             }
         }
     }
 
+    /**
+     * Obtiene un valor y comprueva que sea INT y que este entre los limites establecidos
+     * @param s Scanner para obtener el valor
+     * @param min Minimo valor aceptado
+     * @param max Maximo valor aceptado
+     * @return El numero introducido por el usuario si pasa los tests
+     */
     public static int aplicaOpcio(Scanner s, int min, int max){
         int n = 0;
 
