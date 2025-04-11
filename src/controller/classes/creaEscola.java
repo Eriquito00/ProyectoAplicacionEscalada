@@ -20,7 +20,7 @@ public class creaEscola {
         String popularitat = demanaString(s,"Introduce la popularidad de la escuela.", "Valors valids: 'baixa', 'mitjana' o 'alta'.");
         if (!comprobaPopularitat(popularitat)) throw new InputMismatchException("El valor de popularitat introduit no es valid.");
         String restriccions = demanaString(s,"Introduce las restricciones de la escuela.");
-         e.create(new Escola(poblacio,nom,aproximacio,popularitat,restriccions));
+        e.create(new Escola(poblacio,nom,aproximacio,popularitat,restriccions));
     }
 
     public static boolean comprobaPopularitat(String pop){
