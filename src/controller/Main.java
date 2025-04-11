@@ -2,6 +2,7 @@ package controller;
 
 import controller.menus.MenuClasses;
 import model.connection.MySQLConnection;
+import utils.Test;
 import view.View;
 
 import java.sql.*;
@@ -26,19 +27,21 @@ public class Main {
 
                 switch (opcion){
                     case 1:
-                        MenuClasses.menuClasses(opcion, "CREAR");
+                        MenuClasses.menuClasses(opcion, "CREAR", c);
+                        Test.pruebaConexion(c);
                         break;
                     case 2:
-                        MenuClasses.menuClasses(opcion, "ACTUALIZAR");
+                        MenuClasses.menuClasses(opcion, "ACTUALIZAR", c);
                         break;
                     case 3:
-                        MenuClasses.menuClasses(opcion, "BORRAR");
+                        MenuClasses.menuClasses(opcion, "BORRAR", c);
                         break;
                     case 4:
-                        MenuClasses.menuClasses(opcion, "CONSULTAS");
+                        MenuClasses.menuClasses(opcion, "CONSULTAS", c);
                         break;
                     case 5:
                         MenuClasses.menuConsultasAvanzadas("CONSULTAS AVANZADAS");
+                        //HACE FALTA PASARLE LA CONEXION
                         break;
                     case 6:
                         seguir = false;

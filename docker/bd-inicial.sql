@@ -81,6 +81,7 @@ CREATE TABLE vies (
     ancoratge_id	INT UNSIGNED,
     tipus_roca_id	INT UNSIGNED,
     escalador_id	INT UNSIGNED,
+    dificultat_id   INT UNSIGNED,
     nom 			VARCHAR(50),
     llargada		INT UNSIGNED,
     numero_via		INT UNSIGNED,
@@ -96,5 +97,7 @@ CREATE TABLE vies (
 	CONSTRAINT fk_tipus_roques_vies FOREIGN KEY (tipus_roca_id)
 		REFERENCES tipus_roques (tipus_roca_id),
 	CONSTRAINT fk_escaladors_vies FOREIGN KEY (escalador_id)
-		REFERENCES escaladors (escalador_id)
+		REFERENCES escaladors (escalador_id),
+	CONSTRAINT fk_dificultats_vies FOREIGN KEY (dificultat_id)
+    		REFERENCES dificultats (dificultat_id)
 );

@@ -4,8 +4,13 @@ import controller.Main;
 import view.View;
 import controller.classes.*;
 
+import java.beans.Visibility;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.InputMismatchException;
+
 public class MenuClasses {
-    public static void menuClasses(int opt, String titulo){
+    public static void menuClasses(int opt, String titulo, Connection c){
         boolean seguir = true;
 
         while (seguir){
@@ -34,7 +39,7 @@ public class MenuClasses {
                         break;
                     case 3:
                         switch (opt){
-                            case 1: creaEscola.creaEscola(Main.scan); break;
+                            case 1: creaEscola.creaEscola(Main.scan, c); break;
                             case 2:  break;
                             case 3:  break;
                             case 4:  break;
@@ -54,9 +59,8 @@ public class MenuClasses {
                         break;
                 }
             }
-            catch (RuntimeException e){
-                //Hay que cambiar que en vez de runtime sea SQLExeption
-                System.out.println(e.getMessage());
+            catch (SQLException | InputMismatchException e){
+                View.mostrarMsg(e.getMessage());
             }
         }
     }

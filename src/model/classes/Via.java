@@ -6,18 +6,20 @@ public class Via {
     private String ancoratge;
     private String tipus_roca;
     private String escalador;
+    private String dificultat;
     private String nom;
     private int llargada;
     private int numero_via;
     private String orientacio;
     private String estat;
 
-    public Via(String sector, String tipus, String ancoratge, String tipus_roca, String escalador, String nom, int llargada, int numero_via, String orientacio, String estat) {
+    public Via(String sector, String tipus, String ancoratge, String tipus_roca, String escalador, String dificultat, String nom, int llargada, int numero_via, String orientacio, String estat) {
         this.sector = sector;
         this.tipus = tipus;
         this.ancoratge = ancoratge;
         this.tipus_roca = tipus_roca;
         this.escalador = escalador;
+        this.dificultat = dificultat;
         this.nom = nom;
         this.llargada = llargada;
         this.numero_via = numero_via;
@@ -103,6 +105,14 @@ public class Via {
 
     public void setEstat(String estat) {
         this.estat = estat;
+    }
+
+    public String getDificultat() {
+        return dificultat;
+    }
+
+    public void setDificultat(String dificultat) {
+        this.dificultat = dificultat;
     }
 
     @Override
