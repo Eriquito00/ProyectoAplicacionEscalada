@@ -28,7 +28,7 @@ public class Main {
                 switch (opcion){
                     case 1:
                         MenuClasses.menuClasses(opcion, "CREAR", c);
-                        Test.pruebaConexion(c);
+                        Test.pruebaEscoles(c);
                         break;
                     case 2:
                         MenuClasses.menuClasses(opcion, "ACTUALIZAR", c);
