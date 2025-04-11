@@ -10,13 +10,13 @@ public class Sector {
     private String popularitat;
     private String restriccions;
 
-    public Sector(String escola, String nom, String latitud, String longitud, String aproximacio, int num_vies, String popularitat, String restriccions) {
+    public Sector(String escola, String nom, String latitud, String longitud, String aproximacio, String popularitat, String restriccions) {
         this.escola = escola;
         this.nom = nom;
         this.latitud = latitud;
         this.longitud = longitud;
         this.aproximacio = aproximacio;
-        this.num_vies = num_vies;
+        this.num_vies = 0;
         this.popularitat = popularitat;
         this.restriccions = restriccions;
     }

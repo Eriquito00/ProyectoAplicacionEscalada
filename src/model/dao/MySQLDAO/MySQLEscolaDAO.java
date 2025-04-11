@@ -47,7 +47,7 @@ public class MySQLEscolaDAO implements EscolaDAO {
      * @return ID de l'escola o -1 si no existeix
      * @throws SQLException Error en la consulta
      */
-    public int getIdEscola(String nom) throws SQLException {
+    public int getEscolaIdByNom(String nom) throws SQLException {
         String query = "SELECT escola_id FROM escoles WHERE nom = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
