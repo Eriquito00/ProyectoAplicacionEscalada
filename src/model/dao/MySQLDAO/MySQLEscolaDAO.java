@@ -16,7 +16,12 @@ public class MySQLEscolaDAO implements EscolaDAO {
         this.conn = conn;
     }
 
-
+    /**
+     * Comprovar si una escola existeix a la base de dades
+     * @param nom Nom de l'escola
+     * @return true si existeix, false si no
+     * @throws SQLException Error en la consulta
+     */
     public boolean existeEscola(String nom) throws SQLException {
         String query = "SELECT COUNT(escola_id) AS num_escoles " +
                        "FROM escoles " +
@@ -36,9 +41,38 @@ public class MySQLEscolaDAO implements EscolaDAO {
         }
     }
 
+    /**
+     * Obtenir l'ID d'una escola a partir del seu nom
+     * @param nom Nom de l'escola
+     * @return ID de l'escola o -1 si no existeix
+     * @throws SQLException Error en la consulta
+     */
+    public int getIdEscola(String nom) throws SQLException {
+        String query = "SELECT escola_id FROM escoles WHERE nom = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, nom);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("escola_id");
+            } else {
+                return -1; // Escola no trobada
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; // Error en la consulta
+        }
+    }
+
     // CRUD
 
     // TODO: TESTEAR ESTO SI O SI ERIC, POR DIOS, ARREGLA UN POCO ESTO, ES DEMASIADO TOCHA
+
+    /**
+     * Crear una nova escola a la base de dades
+     * @param escola Escola a crear
+     * @throws SQLException Error en la consulta
+     */
     public void create(Escola escola) throws SQLException {
 
         // Comprovar que la connexió no és null
