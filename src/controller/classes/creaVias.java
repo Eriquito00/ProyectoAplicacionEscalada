@@ -26,11 +26,21 @@ public class creaVias {
         int numero_via = demanaInt("Introdueix el numero de la via.", s, 1, 1000000);
         //Hay que comprobar que el numero de via no exista en esa escuela
         String orientacio = demanaString(s,"Introdueix la orientacio de la via.");
-        //Hay que comprobar que la orientacion sea entre las establecidas
+        if (!comprobaOrientacio(orientacio)) throw new InputMismatchException("La orientacio introduida no es valida.");
         String estat = demanaString(s,"Introdueix l'estat de la via.");
-        //Hay que comprobar que el estado sea entre los establecidos
+        if (!comprobaEstat(estat)) throw new InputMismatchException("El estado introducido no es valido.");
 
         return new Via(sector,tipus,ancoratge,tipus_roca,escalador,dificultat,nom,llargada,numero_via,orientacio,estat);
+    }
+
+    public static boolean comprobaEstat(String est){
+        return (est.toLowerCase().trim().equals("apte")
+                || est.toLowerCase().trim().equals("construccio")
+                || est.toLowerCase().trim().equals("tancada"));
+    }
+
+    public static boolean comprobaOrientacio(String orient){
+        return orient.matches("\\b(N|S|E|O|NE|NO|SE|SO)\\b");
     }
 
     private static String demanaString(Scanner s, String ... msg){
