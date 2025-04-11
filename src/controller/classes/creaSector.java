@@ -21,7 +21,7 @@ public class creaSector {
         String popularitat = demanaString(s,"Introduce la popularidad del sector.");
         if (!comprobaPopularitat(popularitat)) throw new InputMismatchException("El valor de popularitat introduit no es valid.");
         String restriccions = demanaString(s, "Introduce la restriccio del sector.");
-        return new Sector(escola,nom,latitud,longitud,aproximacio,num_vies,popularitat,restriccions);
+        return new Sector(escola,nom,latitud,longitud,aproximacio,popularitat,restriccions);
     }
 
     public static boolean comprobaLatitud(String latitud){

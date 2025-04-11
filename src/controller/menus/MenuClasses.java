@@ -31,7 +31,7 @@ public class MenuClasses {
                         break;
                     case 2:
                         switch (opt){
-                            case 1:  break;
+                            case 1: creaSector.creaSector(Main.scan); break;
                             case 2:  break;
                             case 3:  break;
                             case 4:  break;
