@@ -23,7 +23,7 @@ public class MySQLDificultatDAO {
      * @return id de la dificultat amb aquell nom o -1 si no existeix
      */
     public int getDificultatIdByNom(String nom) {
-        String query = "SELECT dificultat_id FROM dificultats WHERE nom = ?";
+        String query = "SELECT dificultat_id FROM dificultats WHERE grau = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, nom);

@@ -56,11 +56,12 @@ public class MySQLSectorDAO implements SectorDAO {
         String query = "INSERT INTO sectors (escola_id, nom, latitud, longitud, aproximacio, num_vies, popularitat, restriccions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(query);
         int escolaId = new MySQLEscolaDAO(conn).getEscolaIdByNom(o.getEscola());
+        if (escolaId == -1) throw new SQLException("La escola indicada no existeix a la base de dades");
         pstmt.setInt(1, escolaId);
         pstmt.setString(2, o.getNom());
         pstmt.setString(3, o.getLatitud());
         pstmt.setString(4, o.getLongitud());
-        if (o.getAproximacio() == "") {
+        if (o.getAproximacio().equals("")) {
             pstmt.setString(5, null); // Si aproximacio es buida, posar null
         } else {
             pstmt.setString(5, o.getAproximacio());
@@ -68,7 +69,7 @@ public class MySQLSectorDAO implements SectorDAO {
         pstmt.setInt(6, o.getNum_vies()); // Num vies
         pstmt.setString(7, o.getPopularitat());
 
-        if (o.getRestriccions() == "") {
+        if (o.getRestriccions().equals("")) {
             pstmt.setString(8, null); // Si restriccions es buida, posar null
         } else {
             pstmt.setString(8, o.getRestriccions());

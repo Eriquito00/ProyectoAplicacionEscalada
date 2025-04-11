@@ -1,13 +1,17 @@
 package controller.classes;
 
 import model.classes.Via;
+import model.dao.MySQLDAO.MySQLViaDAO;
 import view.View;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class creaVias {
-    public static Via creaVia(Scanner s){
+    public static void creaVia(Scanner s, Connection c) throws SQLException {
+        MySQLViaDAO v = new MySQLViaDAO(c);
         String sector = demanaString(s,"Introduce el nombre del sector de la via.");
         //Comprovar que el sector existe
         String tipus = demanaString(s,"Introduce el nombre del tipo de la via.");
@@ -29,8 +33,7 @@ public class creaVias {
         if (!comprobaOrientacio(orientacio)) throw new InputMismatchException("La orientacio introduida no es valida.");
         String estat = demanaString(s,"Introdueix l'estat de la via.");
         if (!comprobaEstat(estat)) throw new InputMismatchException("El estado introducido no es valido.");
-
-        return new Via(sector,tipus,ancoratge,tipus_roca,escalador,dificultat,nom,llargada,numero_via,orientacio,estat);
+        v.create(new Via(sector,tipus,ancoratge,tipus_roca,escalador,dificultat,nom,llargada,numero_via,orientacio,estat));
     }
 
     public static boolean comprobaEstat(String est){
@@ -51,7 +54,7 @@ public class creaVias {
     private static int demanaInt(String msg, Scanner s, int min, int max){
         View.mostrarMsg(msg);
         int n = Integer.parseInt(s.nextLine());
-        if (n > min || n < max) throw new InputMismatchException("El valor introducido esta fuera de las opciones.");
+        if (n < min || n > max) throw new InputMismatchException("El valor introducido esta fuera de las opciones.");
         return n;
     }
 }

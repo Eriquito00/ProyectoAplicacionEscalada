@@ -28,6 +28,9 @@ public class Main {
                 switch (opcion){
                     case 1:
                         MenuClasses.menuClasses(opcion, "CREAR", c);
+                        Test.pruebaEscoles(c);
+                        Test.pruebaSectores(c);
+                        Test.pruebaVies(c);
                         break;
                     case 2:
                         MenuClasses.menuClasses(opcion, "ACTUALIZAR", c);
@@ -52,6 +55,8 @@ public class Main {
             catch (SQLException e){
                 seguir = false;
                 View.mostrarMsg("Error en la conexion con la base de datos.");
+                //BORRAR LUEGO
+                View.mostrarMsg(e.getMessage());
             }
         }
     }

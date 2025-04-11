@@ -47,44 +47,43 @@ public class MySQLViaDAO implements ViaDAO {
             throw new SQLException("La connexió a la base de dades és null");
         }
 
-        String query = "INSERT INTO vies (nom, sector_id, tipus_id, ancoratge_id, escalador_id, dificultat_id, nom, llargada, numero_via, orientacio, estat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO vies (sector_id, tipus_id, ancoratge_id, escalador_id, dificultat_id, nom, llargada, numero_via, orientacio, estat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(query);
         MySQLSectorDAO mySQLSectorDAO = new MySQLSectorDAO(conn);
         MySQLTipusDAO mySQLTipusDAO = new MySQLTipusDAO(conn);
         MySQLAncoratgeDAO mySQLAncoratgeDAO = new MySQLAncoratgeDAO(conn);
         MySQLEscaladorDAO mySQLEscaladorDAO = new MySQLEscaladorDAO(conn);
         MySQLDificultatDAO mySQLDificultatDAO = new MySQLDificultatDAO(conn);
-        pstmt.setString(1, o.getNom());
         int sectorId = mySQLSectorDAO.getSectorIdByNom(o.getSector());
         if (sectorId == -1) {
             throw new SQLException("El sector no existeix a la base de dades");
         }
-        pstmt.setInt(2, sectorId);
+        pstmt.setInt(1, sectorId);
         int  tipusId = mySQLTipusDAO.getTipusIdByNom(o.getTipus());
         if (tipusId == -1) {
             throw new SQLException("El tipus no existeix a la base de dades");
         }
-        pstmt.setInt(3, tipusId);
+        pstmt.setInt(2, tipusId);
         int ancoratgeId = mySQLAncoratgeDAO.getAncoratgeIdByNom(o.getAncoratge());
         if (ancoratgeId == -1) {
             throw new SQLException("L'ancoratge no existeix a la base de dades");
         }
-        pstmt.setInt(4, ancoratgeId);
+        pstmt.setInt(3, ancoratgeId);
         int escaladorId = mySQLEscaladorDAO.getEscaladorIdByNom(o.getEscalador());
         if (escaladorId == -1) {
             throw new SQLException("L'escalador no existeix a la base de dades");
         }
-        pstmt.setInt(5, escaladorId);
+        pstmt.setInt(4, escaladorId);
         int dificultatId = mySQLDificultatDAO.getDificultatIdByNom(o.getDificultat());
         if (dificultatId == -1) {
             throw new SQLException("La dificultat no existeix a la base de dades");
         }
-        pstmt.setInt(6, dificultatId);
-        pstmt.setString(7, o.getNom());
-        pstmt.setInt(8, o.getLlargada());
-        pstmt.setInt(9, o.getNumero_via());
-        pstmt.setString(10, o.getOrientacio());
-        pstmt.setString(11, o.getEstat());
+        pstmt.setInt(5, dificultatId);
+        pstmt.setString(6, o.getNom());
+        pstmt.setInt(7, o.getLlargada());
+        pstmt.setInt(8, o.getNumero_via());
+        pstmt.setString(9, o.getOrientacio());
+        pstmt.setString(10, o.getEstat());
         pstmt.executeUpdate();
     }
     @Override

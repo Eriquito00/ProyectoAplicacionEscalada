@@ -1,13 +1,17 @@
 package controller.classes;
 
 import model.classes.Sector;
+import model.dao.MySQLDAO.MySQLSectorDAO;
 import view.View;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class creaSector {
-    public static Sector creaSector(Scanner s){
+    public static void creaSector(Scanner s, Connection c) throws SQLException {
+        MySQLSectorDAO sec = new MySQLSectorDAO(c);
         String escola = demanaString(s,"Introduce el nombre de la escuela de la via.");
         //Comprovar que la escuela existe
         String nom = demanaString(s,"Introduce el nombre del sector.");
@@ -21,15 +25,15 @@ public class creaSector {
         String popularitat = demanaString(s,"Introduce la popularidad del sector.");
         if (!comprobaPopularitat(popularitat)) throw new InputMismatchException("El valor de popularitat introduit no es valid.");
         String restriccions = demanaString(s, "Introduce la restriccio del sector.");
-        return new Sector(escola,nom,latitud,longitud,aproximacio,popularitat,restriccions);
+        sec.create(new Sector(escola,nom,latitud,longitud,aproximacio,popularitat,restriccions));
     }
 
     public static boolean comprobaLatitud(String latitud){
-        return latitud.matches("^(90|[1-8]?[0-9])°([0-5]?[0-9])'([0-5]?[0-9])\" [NSns]$");
+        return latitud.matches("^(90|[1-8]?[0-9])º([0-5]?[0-9])\'([0-5]?[0-9])\"[NS]$");
     }
 
     public static boolean comprobaLongitud(String longitud){
-        return longitud.matches("^(180|[1-9]?[0-9])°([0-5]?[0-9])'([0-5]?[0-9])\" [OEoe]$");
+        return longitud.matches("^(180|[1-9]?[0-9])º([0-5]?[0-9])\'([0-5]?[0-9])\"[OE]$");
     }
 
     public static boolean comprobaPopularitat(String pop){
