@@ -22,7 +22,7 @@ public class MenuClasses {
                 switch (opcion){
                     case 1:
                         switch (opt){
-                            case 1: creaVias.creaVia(Main.scan, c); break;
+                            case 1: creaVia.creaVia(Main.scan, c); break;
                             case 2:  break;
                             case 3:  break;
                             case 4:  break;
@@ -46,7 +46,7 @@ public class MenuClasses {
                         break;
                     case 4:
                         switch (opt){
-                            case 1:  break;
+                            case 1: creaEscalador.creaEscalador(Main.scan,c); break;
                             case 2:  break;
                             case 3:  break;
                             case 4:  break;

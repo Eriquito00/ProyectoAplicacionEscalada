@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class creaVias {
+public class creaVia {
     public static void creaVia(Scanner s, Connection c) throws SQLException {
         MySQLViaDAO v = new MySQLViaDAO(c);
         String sector = demanaString(s,"Introduce el nombre del sector de la via.");
