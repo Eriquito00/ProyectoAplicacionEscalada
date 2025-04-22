@@ -57,6 +57,7 @@ public class MySQLSectorDAO implements SectorDAO {
         PreparedStatement pstmt = conn.prepareStatement(query);
         int escolaId = new MySQLEscolaDAO(conn).getEscolaIdByNom(o.getEscola());
         if (escolaId == -1) throw new SQLException("La escola indicada no existeix a la base de dades");
+        // TODO: Comprovar si el nombre del sector existe en la escuela indicada
         pstmt.setInt(1, escolaId);
         pstmt.setString(2, o.getNom());
         pstmt.setString(3, o.getLatitud());

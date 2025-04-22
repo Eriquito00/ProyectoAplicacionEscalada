@@ -54,6 +54,7 @@ public class MySQLViaDAO implements ViaDAO {
         MySQLAncoratgeDAO mySQLAncoratgeDAO = new MySQLAncoratgeDAO(conn);
         MySQLEscaladorDAO mySQLEscaladorDAO = new MySQLEscaladorDAO(conn);
         MySQLDificultatDAO mySQLDificultatDAO = new MySQLDificultatDAO(conn);
+        // TODO: Comprovar si nom de la via ja existeix a l'escola
         int sectorId = mySQLSectorDAO.getSectorIdByNom(o.getSector());
         if (sectorId == -1) {
             throw new SQLException("El sector no existeix a la base de dades");

@@ -38,4 +38,27 @@ public class MySQLDificultatDAO {
             return -1; // Error en la consulta
         }
     }
+
+    /**
+     * Obtenir el nom d'una dificultat a partir del seu id
+     * @param idDificultat id de la dificultat
+     * @return Nom de la dificultat o null si no existeix
+     */
+    public String getNomDificultatById(int idDificultat) {
+        String query = "SELECT grau FROM dificultats WHERE dificultat_id = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, idDificultat);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("grau");
+            } else {
+                return null; // Dificultat no trobada
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null; // Error en la consulta
+        }
+    }
+
 }
