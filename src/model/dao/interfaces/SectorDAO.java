@@ -9,4 +9,5 @@ public interface SectorDAO extends DAO<Sector,Integer> {
     public int getNumVies(int idEscola) throws SQLException;
     public int getSectorIdByNom(String nom) throws SQLException;
     public String getEscola(String sector) throws SQLException;
+    public Boolean sectorExists(String nom, String escola) throws SQLException;
 }
