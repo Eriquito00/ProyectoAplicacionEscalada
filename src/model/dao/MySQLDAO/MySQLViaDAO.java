@@ -60,7 +60,8 @@ public class MySQLViaDAO implements ViaDAO {
     public String getDificultatByNom(String nom, String escolaNom) {
         String query = "SELECT d.grau FROM vies v " +
                         "INNER JOIN dificultats d ON d.dificultat_id = v.dificultat_id " +
-                        "WHERE v.nom = ? AND v.escola_id = (SELECT escola_id FROM escoles WHERE nom = ?)";
+                        "INNER JOIN sectors s ON v.sector_id = s.sector_id" +
+                        "WHERE v.nom = ? AND s.escola_id = (SELECT escola_id FROM escoles WHERE nom = ?)";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, nom);
