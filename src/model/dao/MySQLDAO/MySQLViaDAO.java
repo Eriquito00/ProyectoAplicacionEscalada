@@ -104,13 +104,14 @@ public class MySQLViaDAO implements ViaDAO {
             throw new SQLException("La connexió a la base de dades és null");
         }
 
-        String query = "INSERT INTO vies (sector_id, tipus_id, ancoratge_id, escalador_id, dificultat_id, nom, llargada, numero_via, orientacio, estat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO vies (sector_id, tipus_id, ancoratge_id, tipus_roca_id, escalador_id, dificultat_id, nom, llargada, numero_via, orientacio, estat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = conn.prepareStatement(query);
         MySQLSectorDAO mySQLSectorDAO = new MySQLSectorDAO(conn);
         MySQLTipusDAO mySQLTipusDAO = new MySQLTipusDAO(conn);
         MySQLAncoratgeDAO mySQLAncoratgeDAO = new MySQLAncoratgeDAO(conn);
         MySQLEscaladorDAO mySQLEscaladorDAO = new MySQLEscaladorDAO(conn);
         MySQLDificultatDAO mySQLDificultatDAO = new MySQLDificultatDAO(conn);
+        MySQLTipusRocaDAO mySQLTipusRocaDAO = new MySQLTipusRocaDAO(conn);
         MySQLViaDAO mySQLViaDAO = new MySQLViaDAO(conn);
 
         int sectorId = mySQLSectorDAO.getSectorIdByNom(o.getSector());
@@ -132,27 +133,60 @@ public class MySQLViaDAO implements ViaDAO {
             throw new SQLException("L'ancoratge no existeix a la base de dades");
         }
         pstmt.setInt(3, ancoratgeId);
+
+        int tipusRocaId = mySQLTipusRocaDAO.getTipusRocaIdByNom(o.getTipus_roca());
+        if (tipusRocaId == -1) {
+            throw new SQLException("El tipus de roca no existeix a la base de dades");
+        }
+        pstmt.setInt(4, tipusRocaId);
+
         int escaladorId = mySQLEscaladorDAO.getEscaladorIdByNom(o.getEscalador());
         if (escaladorId == -1) {
             throw new SQLException("L'escalador no existeix a la base de dades");
         }
-        pstmt.setInt(4, escaladorId);
+        pstmt.setInt(5, escaladorId);
         int dificultatId = mySQLDificultatDAO.getDificultatIdByNom(o.getDificultat());
         if (dificultatId == -1) {
             throw new SQLException("La dificultat no existeix a la base de dades");
         }
-        pstmt.setInt(5, dificultatId);
-        pstmt.setString(6, o.getNom());
-        pstmt.setInt(7, o.getLlargada());
-        pstmt.setInt(8, o.getNumero_via());
-        pstmt.setString(9, o.getOrientacio());
-        pstmt.setString(10, o.getEstat());
+        pstmt.setInt(6, dificultatId);
+        pstmt.setString(7, o.getNom());
+        pstmt.setInt(8, o.getLlargada());
+        pstmt.setInt(9, o.getNumero_via());
+        pstmt.setString(10, o.getOrientacio());
+        pstmt.setString(11, o.getEstat());
         pstmt.executeUpdate();
     }
     @Override
-    public Via read(Integer id) {
-        return null;
+    public Via read(Integer id) throws SQLException {
+        String query = "SELECT v.nom, s.nom AS sector, t.nom AS tipus, a.nom AS ancoratge, tr.nom AS tipus_roca, e.nom AS escalador, d.grau AS dificultat, v.llargada, v.numero_via, v.orienacio, v.estat " +
+                        "FROM vies v " +
+                        "INNER JOIN sectors s ON v.sector_id = s.sector_id " +
+                        "INNER JOIN tipus t ON v.tipus_id = t.tipus_id " +
+                        "INNER JOIN ancoratges a ON v.ancoratge_id = a.ancoratge_id " +
+                        "INNER JOIN tipus_roques tr ON v.tipus_roca_id = tr.tipus_roca_id " +
+                        "INNER JOIN escaladors e ON v.escalador_id = e.escalador_id " +
+                        "INNER JOIN dificultats d ON v.dificultat_id = d.dificultat_id " +
+                        "WHERE v.via_id = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return new Via(rs.getString("sector"), rs.getString("tipus"), rs.getString("ancoratge"),
+                        rs.getString("tipus_roca"), rs.getString("escalador"), rs.getString("dificultat"),
+                        rs.getString("nom"), rs.getInt("llargada"), rs.getInt("numero_via"),
+                        rs.getString("orientacio"), rs.getString("estat"));
+            } else {
+                throw new SQLException("La via no existeix a la base de dades");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null; // Error en la consulta
+        }
     }
+
+
     @Override
     public void update(Via o) {
 
