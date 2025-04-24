@@ -38,6 +38,45 @@ public class MySQLViaDAO implements ViaDAO {
         }
     }
 
+    @Override
+    public int getViaIdByNom(String nom) {
+        String query = "SELECT via_id FROM vies WHERE nom = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, nom);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("via_id");
+            } else {
+                return -1; // Via no trobada
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1; // Error en la consulta
+        }
+    }
+
+    @Override
+    public String getDificultatByNom(String nom, String escolaNom) {
+        String query = "SELECT d.grau FROM vies v " +
+                        "INNER JOIN dificultats d ON d.dificultat_id = v.dificultat_id " +
+                        "WHERE v.nom = ? AND v.escola_id = (SELECT escola_id FROM escoles WHERE nom = ?)";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, nom);
+            pstmt.setString(2, escolaNom);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getString("grau");
+            } else {
+                return null; // Via no trobada
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null; // Error en la consulta
+        }
+    }
+
     // CRUD
     @Override
     public void create(Via o) throws SQLException {

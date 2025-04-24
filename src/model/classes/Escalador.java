@@ -5,14 +5,16 @@ public class Escalador {
     private String alies;
     private int edad;
     private String nombre_via_max;
+    private String escola_via_max;
     private String tipo_favorito;
     private String fita;
 
-    public Escalador(String nom, String alies, int edad, String nombre_via_max, String tipo_favorito, String fita) {
+    public Escalador(String nom, String alies, int edad, String nombre_via_max, String escola_via_max, String tipo_favorito, String fita) {
         this.nom = nom;
         this.alies = alies;
         this.edad = edad;
         this.nombre_via_max = nombre_via_max;
+        this.escola_via_max = escola_via_max;
         this.tipo_favorito = tipo_favorito;
         this.fita = fita;
     }
@@ -49,6 +51,14 @@ public class Escalador {
         this.nombre_via_max = nombre_via_max;
     }
 
+    public String getEscola_via_max() {
+        return escola_via_max;
+    }
+
+    public void setEscola_via_max(String escola_via_max) {
+        this.escola_via_max = escola_via_max;
+    }
+
     public String getTipo_favorito() {
         return tipo_favorito;
     }
@@ -71,6 +81,7 @@ public class Escalador {
                 "alies: " + alies + "\n" +
                 "edad: " + edad + "\n" +
                 "nombre_via_max: " + nombre_via_max + "\n" +
+                "escola_via_max: " + escola_via_max + "\n" +
                 "tipo_favorito: " + tipo_favorito + "\n" +
                 "fita: " + fita + "\n";
     }
