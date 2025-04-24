@@ -7,33 +7,42 @@ import view.View;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class borrarObjeto {
     public static void deleteEscoles(Connection c) throws SQLException {
         MySQLEscolaDAO escolaDAO = new MySQLEscolaDAO(c);
         View.mostrarMsg(mostrarTodo.mostrarEscoles(c));
-        int id = Main.aplicaOpcio(Main.scan,1,2000000);
+        int id = demanaInt("Introduce la ID de la escuela que quieres eliminar.",Main.scan,1,2000000);
         escolaDAO.delete(id);
     }
 
     public static void deleteVies(Connection c) throws SQLException {
         MySQLViaDAO viaDAO = new MySQLViaDAO(c);
         View.mostrarMsg(mostrarTodo.mostrarVies(c));
-        int id = Main.aplicaOpcio(Main.scan,1,2000000);
+        int id = demanaInt("Introduce la ID de la via que quieres eliminar.",Main.scan,1,2000000);
         viaDAO.delete(id);
     }
 
     public static void deleteSectores(Connection c) throws SQLException {
         MySQLSectorDAO sectorDAO = new MySQLSectorDAO(c);
         View.mostrarMsg(mostrarTodo.mostrarSectores(c));
-        int id = Main.aplicaOpcio(Main.scan,1,2000000);
+        int id = demanaInt("Introduce la ID del sector que quieres eliminar.",Main.scan,1,2000000);
         sectorDAO.delete(id);
     }
 
     public static void deleteEscaladores(Connection c) throws SQLException {
         MySQLEscaladorDAO escaladorDAO = new MySQLEscaladorDAO(c);
         View.mostrarMsg(mostrarTodo.mostrarEscaladores(c));
-        int id = Main.aplicaOpcio(Main.scan,1,2000000);
+        int id = demanaInt("Introduce la ID del escalador que quieres eliminar.",Main.scan,1,2000000);
         escaladorDAO.delete(id);
+    }
+
+    private static int demanaInt(String msg, Scanner s, int min, int max){
+        View.mostrarMsg(msg);
+        int n = Integer.parseInt(s.nextLine());
+        if (n < min || n > max) throw new InputMismatchException("El valor introducido no existe.");
+        return n;
     }
 }

@@ -117,15 +117,26 @@ public class Via {
 
     @Override
     public String toString() {
-        return "sector: " + sector + "\n" +
-                "tipus: " + tipus + "\n" +
-                "ancoratge: " + ancoratge + "\n" +
-                "tipus_roca: " + tipus_roca + "\n" +
-                "escalador: " + escalador + "\n" +
-                "nom: " + nom + "\n" +
-                "llargada: " + llargada + "\n" +
-                "numero_via: " + numero_via + "\n" +
-                "orientacio: " + orientacio + "\n" +
-                "estat: " + estat + "\n";
+        return String.format(
+                        "%-15s %-60s\n" +
+                        "%-15s %-15s\n" +
+                        "%-15s %-15s\n" +
+                        "%-15s %-15s\n" +
+                        "%-15s %-60s\n" +
+                        "%-15s %-60s\n" +
+                        "%-15s %-25s\n" +
+                        "%-15s %-15s\n" +
+                        "%-15s %-15s\n" +
+                        "%-15s %-15s\n",
+                "Sector:", sector,
+                "Tipo:", tipus,
+                "Ancorage:", ancoratge,
+                "Tipo roca:", tipus_roca,
+                "Escalador:", escalador,
+                "Nombre:", nom,
+                "Longitud:", llargada,
+                "Numero via:", numero_via,
+                "Orientacion:", orientacio,
+                "Estado:", estat);
     }
 }

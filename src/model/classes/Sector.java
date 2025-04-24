@@ -87,13 +87,23 @@ public class Sector {
 
     @Override
     public String toString() {
-        return "poblacio: " + escola + "\n" +
-                "nom: " + nom + "\n" +
-                "latitud: " + latitud + "\n" +
-                "longitud: " + longitud + "\n" +
-                "aproximacio: " + aproximacio + "\n" +
-                "num_vies: " + num_vies + "\n" +
-                "popularitat: " + popularitat + "\n" +
-                "restriccions: " + restriccions + "\n";
+        return String.format(
+                        "%-15s %-60s\n" +
+                        "%-15s %-60s\n" +
+                        "%-15s %-25s\n" +
+                        "%-15s %-25s\n" +
+                        "%-15s %-110s\n" +
+                        "%-15s %-15s\n" +
+                        "%-15s %-15s\n" +
+                        "%-15s %-110s\n",
+                "Poblacion:", escola,
+                "Nombre:", nom,
+                "Latitud:", latitud,
+                "Longitud:", longitud,
+                "Aproximacion:", aproximacio,
+                "Num vias:", num_vies,
+                "Popularidad:", popularitat,
+                "Restricciones:", restriccions
+        );
     }
 }

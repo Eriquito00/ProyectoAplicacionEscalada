@@ -33,7 +33,7 @@ public class MenuClasses {
                                 int v = Main.aplicaOpcio(Main.scan, 1,2);
                                 switch (v){
                                     case 1: View.mostrarMsg(mostrarTodo.mostrarVies(c)); break;
-                                    case 2: mostrarUno.mostrarVies(c); break;
+                                    case 2: View.mostrarMsg(mostrarUno.mostrarVies(c).toString()); break;
                                 }
                                 break;
                         }

@@ -77,12 +77,22 @@ public class Escalador {
 
     @Override
     public String toString() {
-        return "nom: " + nom + "\n" +
-                "alies: " + alies + "\n" +
-                "edad: " + edad + "\n" +
-                "nombre_via_max: " + nombre_via_max + "\n" +
-                "escola_via_max: " + escola_via_max + "\n" +
-                "tipo_favorito: " + tipo_favorito + "\n" +
-                "fita: " + fita + "\n";
+        return String.format(
+                        "%-15s %-60s\n" +
+                        "%-15s %-60s\n" +
+                        "%-15s %-5s\n" +
+                        "%-15s %-60s\n" +
+                        "%-15s %-60s\n" +
+                        "%-15s %-15s\n" +
+                        "%-15s %-110s\n",
+                "Nom:", nom,
+                "Alies:", alies,
+                "Edad:", edad,
+                "Nombre via max:", nombre_via_max,
+                "Escuela via max:", escola_via_max,
+                "Tipo favorito:", tipo_favorito,
+                "Fita:", fita
+        );
+
     }
 }

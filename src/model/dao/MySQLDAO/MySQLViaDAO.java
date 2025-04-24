@@ -159,7 +159,7 @@ public class MySQLViaDAO implements ViaDAO {
     }
     @Override
     public Via read(Integer id) throws SQLException {
-        String query = "SELECT v.nom, s.nom AS sector, t.nom AS tipus, a.nom AS ancoratge, tr.nom AS tipus_roca, e.nom AS escalador, d.grau AS dificultat, v.llargada, v.numero_via, v.orienacio, v.estat " +
+        String query = "SELECT v.nom, s.nom AS sector, t.nom AS tipus, a.nom AS ancoratge, tr.nom AS tipus_roca, e.nom AS escalador, d.grau AS dificultat, v.llargada, v.numero_via, v.orientacio, v.estat " +
                         "FROM vies v " +
                         "INNER JOIN sectors s ON v.sector_id = s.sector_id " +
                         "INNER JOIN tipus t ON v.tipus_id = t.tipus_id " +

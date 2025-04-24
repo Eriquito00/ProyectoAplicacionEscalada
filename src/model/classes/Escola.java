@@ -67,11 +67,19 @@ public class Escola {
 
     @Override
     public String toString() {
-        return "poblacio: " + poblacio + "\n" +
-                "nom: " + nom + "\n" +
-                "aproximacio: " + aproximacio + "\n" +
-                "num_vies: " + num_vies + "\n" +
-                "popularitat: " + popularitat + "\n" +
-                "restriccions: " + restriccions + "\n";
+        return String.format(
+                        "%-15s %-60s\n" +
+                        "%-15s %-60s\n" +
+                        "%-15s %-110s\n" +
+                        "%-15s %-15s\n" +
+                        "%-15s %-15s\n" +
+                        "%-15s %-110s\n",
+                "Poblacion:", poblacio,
+                "Nombre:", nom,
+                "Aproximacion:", aproximacio,
+                "Num vias:", num_vies,
+                "Popularidad:", popularitat,
+                "Restricciones:", restriccions
+        );
     }
 }
