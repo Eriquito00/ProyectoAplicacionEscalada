@@ -78,6 +78,23 @@ public class MySQLViaDAO implements ViaDAO {
         }
     }
 
+    @Override
+    public Boolean existeVia(String nom, String escolaNom) {
+        String query = "SELECT v.via_id FROM vies v " +
+                        "INNER JOIN sectors s ON v.sector_id = s.sector_id" +
+                        "WHERE v.nom = ? AND s.escola_id = (SELECT escola_id FROM escoles WHERE nom = ?)";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, nom);
+            pstmt.setString(2, escolaNom);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next(); // Si hi ha resultats, la via existeix
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Error en la consulta
+        }
+    }
+
     // CRUD
     @Override
     public void create(Via o) throws SQLException {
@@ -94,11 +111,16 @@ public class MySQLViaDAO implements ViaDAO {
         MySQLAncoratgeDAO mySQLAncoratgeDAO = new MySQLAncoratgeDAO(conn);
         MySQLEscaladorDAO mySQLEscaladorDAO = new MySQLEscaladorDAO(conn);
         MySQLDificultatDAO mySQLDificultatDAO = new MySQLDificultatDAO(conn);
-        // TODO: Comprovar si nom de la via ja existeix a l'escola
+        MySQLViaDAO mySQLViaDAO = new MySQLViaDAO(conn);
+
         int sectorId = mySQLSectorDAO.getSectorIdByNom(o.getSector());
         if (sectorId == -1) {
             throw new SQLException("El sector no existeix a la base de dades");
         }
+        if (mySQLViaDAO.existeVia(o.getNom(), mySQLSectorDAO.getEscola(o.getSector()))) {
+            throw new SQLException("La via ja existeix a la base de dades");
+        }
+
         pstmt.setInt(1, sectorId);
         int  tipusId = mySQLTipusDAO.getTipusIdByNom(o.getTipus());
         if (tipusId == -1) {

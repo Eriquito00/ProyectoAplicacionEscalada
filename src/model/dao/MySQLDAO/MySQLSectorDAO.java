@@ -42,6 +42,19 @@ public class MySQLSectorDAO implements SectorDAO {
         }
     }
 
+    @Override
+    public String getEscola(String sector) throws SQLException {
+        String query = "SELECT e.nom FROM sectors s INNER JOIN escoles e ON s.escola_id = e.escola_id WHERE s.nom = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, sector);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            return rs.getString("nom");
+        } else {
+            return null; // Sector no trobat
+        }
+    }
+
     // CRUD
 
     @Override

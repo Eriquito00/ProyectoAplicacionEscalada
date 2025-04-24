@@ -8,4 +8,5 @@ import java.sql.SQLException;
 public interface SectorDAO extends DAO<Sector,Integer> {
     public int getNumVies(int idEscola) throws SQLException;
     public int getSectorIdByNom(String nom) throws SQLException;
+    public String getEscola(String sector) throws SQLException;
 }
