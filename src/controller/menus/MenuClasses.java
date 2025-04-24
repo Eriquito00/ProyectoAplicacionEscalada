@@ -1,10 +1,9 @@
 package controller.menus;
 
 import controller.Main;
-import controller.classes.create.creaEscalador;
-import controller.classes.create.creaEscola;
-import controller.classes.create.creaSector;
-import controller.classes.create.creaVia;
+import controller.classes.create.*;
+import controller.classes.delete.*;
+import controller.classes.read.*;
 import view.View;
 
 import java.sql.Connection;
@@ -26,33 +25,65 @@ public class MenuClasses {
                     case 1:
                         switch (opt){
                             case 1: creaVia.creaVia(Main.scan, c); break;
-                            case 2:  break;
+                            case 2: borrarObjeto.deleteVies(c); break;
                             case 3:  break;
-                            case 4:  break;
+                            case 4:
+                                View.mostrartitulo("TIPOS DE CONSULTA");
+                                View.mostrarMenu("Mostrar todos", "Mostrar uno");
+                                int v = Main.aplicaOpcio(Main.scan, 1,2);
+                                switch (v){
+                                    case 1: View.mostrarMsg(mostrarTodo.mostrarVies(c)); break;
+                                    case 2: mostrarUno.mostrarVies(c); break;
+                                }
+                                break;
                         }
                         break;
                     case 2:
                         switch (opt){
                             case 1: creaSector.creaSector(Main.scan, c); break;
-                            case 2:  break;
+                            case 2: borrarObjeto.deleteSectores(c); break;
                             case 3:  break;
-                            case 4:  break;
+                            case 4:
+                                View.mostrartitulo("TIPOS DE CONSULTA");
+                                View.mostrarMenu("Mostrar todos", "Mostrar uno");
+                                int s = Main.aplicaOpcio(Main.scan, 1,2);
+                                switch (s){
+                                    case 1: View.mostrarMsg(mostrarTodo.mostrarSectores(c)); break;
+                                    case 2: mostrarUno.mostrarSectores(c); break;
+                                }
+                                break;
                         }
                         break;
                     case 3:
                         switch (opt){
                             case 1: creaEscola.creaEscola(Main.scan, c); break;
-                            case 2:  break;
+                            case 2: borrarObjeto.deleteEscoles(c); break;
                             case 3:  break;
-                            case 4:  break;
+                            case 4:
+                                View.mostrartitulo("TIPOS DE CONSULTA");
+                                View.mostrarMenu("Mostrar todos", "Mostrar uno");
+                                int e = Main.aplicaOpcio(Main.scan, 1,2);
+                                switch (e){
+                                    case 1: View.mostrarMsg(mostrarTodo.mostrarEscoles(c)); break;
+                                    case 2: mostrarUno.mostrarEscoles(c); break;
+                                }
+                                break;
                         }
                         break;
                     case 4:
                         switch (opt){
                             case 1: creaEscalador.creaEscalador(Main.scan,c); break;
-                            case 2:  break;
+                            case 2: borrarObjeto.deleteEscaladores(c); break;
                             case 3:  break;
-                            case 4:  break;
+                            case 4:
+                                View.mostrartitulo("TIPOS DE CONSULTA");
+                                View.mostrarMenu("Mostrar todos", "Mostrar uno");
+                                int esc = Main.aplicaOpcio(Main.scan, 1,2);
+                                switch (esc){
+                                    case 1: View.mostrarMsg(mostrarTodo.mostrarEscaladores(c)); break;
+                                    case 2: mostrarUno.mostrarEscaladores(c); break;
+                                }
+                                break;
                         }
                         break;
                     case 5:
@@ -63,45 +94,6 @@ public class MenuClasses {
             }
             catch (SQLException | InputMismatchException e){
                 View.mostrarMsg(e.getMessage());
-            }
-        }
-    }
-
-    public static void menuConsultasAvanzadas(String titulo){
-        boolean seguir = true;
-
-        while (seguir){
-
-            View.mostrartitulo(titulo);
-            View.mostrarMenu("Consulta1","Consulta2","Consulta3","Consulta4","Consulta5","Salir");
-            int opcion = Main.aplicaOpcio(Main.scan, 1, 6);
-
-            try {
-                switch (opcion){
-                    case 1:
-                        //Consulta avanzada 1
-                        break;
-                    case 2:
-                        //Consulta avanzada 2
-                        break;
-                    case 3:
-                        //Consulta avanzada 3
-                        break;
-                    case 4:
-                        //Consulta avanzada 4
-                        break;
-                    case 5:
-                        //Consulta avanzada 5
-                        break;
-                    case 6:
-                        seguir = false;
-                        View.mostrarMsg("Volviendo al menu principal...");
-                        break;
-                }
-            }
-            catch (RuntimeException e){
-                //Hay que cambiar que en vez de runtime sea SQLExeption
-                System.out.println(e.getMessage());
             }
         }
     }

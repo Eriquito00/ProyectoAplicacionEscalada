@@ -1,5 +1,6 @@
 package controller;
 
+import controller.menus.MenuAvanzados;
 import controller.menus.MenuClasses;
 import model.connection.MySQLConnection;
 import utils.Test;
@@ -28,9 +29,6 @@ public class Main {
                 switch (opcion){
                     case 1:
                         MenuClasses.menuClasses(opcion, "CREAR", c);
-                        Test.pruebaEscoles(c);
-                        Test.pruebaSectores(c);
-                        Test.pruebaVies(c);
                         break;
                     case 2:
                         MenuClasses.menuClasses(opcion, "ACTUALIZAR", c);
@@ -42,7 +40,7 @@ public class Main {
                         MenuClasses.menuClasses(opcion, "CONSULTAS", c);
                         break;
                     case 5:
-                        MenuClasses.menuConsultasAvanzadas("CONSULTAS AVANZADAS");
+                        MenuAvanzados.menuConsultasAvanzadas("CONSULTAS AVANZADAS");
                         //HACE FALTA PASARLE LA CONEXION
                         break;
                     case 6:

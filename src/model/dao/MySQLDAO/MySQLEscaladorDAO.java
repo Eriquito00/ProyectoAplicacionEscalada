@@ -85,6 +85,7 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
         pstmt.setString(5, o.getNombre_via_max());
         pstmt.setString(6, o.getTipo_favorito());
         pstmt.setString(7, o.getFita());
+        pstmt.executeUpdate();
     }
 
     @Override
