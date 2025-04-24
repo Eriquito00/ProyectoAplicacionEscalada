@@ -3,10 +3,7 @@ package model.dao.MySQLDAO;
 import model.classes.Sector;
 import model.dao.interfaces.SectorDAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class MySQLSectorDAO implements SectorDAO {
     private final Connection conn;
@@ -60,6 +57,9 @@ public class MySQLSectorDAO implements SectorDAO {
         // TODO: Comprovar si el nombre del sector existe en la escuela indicada
         pstmt.setInt(1, escolaId);
         pstmt.setString(2, o.getNom());
+
+        if (getSectorDispo(escolaId, o.getNom())) throw new SQLException("El sector introducido ya existe en esta escuela.");
+
         pstmt.setString(3, o.getLatitud());
         pstmt.setString(4, o.getLongitud());
         if (o.getAproximacio().equals("")) {
@@ -76,6 +76,14 @@ public class MySQLSectorDAO implements SectorDAO {
             pstmt.setString(8, o.getRestriccions());
         }
         pstmt.executeUpdate();
+    }
+
+    public boolean getSectorDispo(int id, String nom) throws SQLException{
+        String query = "SELECT sector_id FROM sectors WHERE escola_id = " + id + " AND nom = " + nom;
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        return rs.getString(1).equals("null");
+        //NO SE SI DEVUELVE NULL O SI NO ENCUENTRA
     }
 
     @Override

@@ -4,17 +4,15 @@ public class Escalador {
     private String nom;
     private String alies;
     private int edad;
-    private String nivel_max;
     private String nombre_via_max;
     private String escola_via_max;
     private String tipo_favorito;
     private String fita;
 
-    public Escalador(String nom, String alies, int edad, String nivel_max, String nombre_via_max, String escola_via_max, String tipo_favorito, String fita) {
+    public Escalador(String nom, String alies, int edad, String nombre_via_max, String escola_via_max, String tipo_favorito, String fita) {
         this.nom = nom;
         this.alies = alies;
         this.edad = edad;
-        this.nivel_max = nivel_max;
         this.nombre_via_max = nombre_via_max;
         this.escola_via_max = escola_via_max;
         this.tipo_favorito = tipo_favorito;
@@ -43,14 +41,6 @@ public class Escalador {
 
     public void setEdad(int edad) {
         this.edad = edad;
-    }
-
-    public String getNivel_max() {
-        return nivel_max;
-    }
-
-    public void setNivel_max(String nivel_max) {
-        this.nivel_max = nivel_max;
     }
 
     public String getNombre_via_max() {
@@ -90,8 +80,8 @@ public class Escalador {
         return "nom: " + nom + "\n" +
                 "alies: " + alies + "\n" +
                 "edad: " + edad + "\n" +
-                "nivel_max: " + nivel_max + "\n" +
                 "nombre_via_max: " + nombre_via_max + "\n" +
+                "escola_via_max: " + escola_via_max + "\n" +
                 "tipo_favorito: " + tipo_favorito + "\n" +
                 "fita: " + fita + "\n";
     }
