@@ -12,15 +12,16 @@ import java.util.Scanner;
 public class creaEscalador {
     public static void creaEscalador (Scanner s, Connection c) throws SQLException {
         MySQLEscaladorDAO e = new MySQLEscaladorDAO(c);
-        String nom = demanaString(s, "Introduce el nombre del escalador.");
-        String alies = demanaString(s, "Introduce el alias del escalador.");
+        String nom = demanaString(s, 50, "Introduce el nombre del escalador.");
+        String alies = demanaString(s, 50,"Introduce el alias del escalador.");
         int edad = demanaInt("Introduce la edad del escalador.",s,18,150);
-        String nombre_via_max = demanaString(s,"Introduce el nombre de la via que conseguiste tu maximo de dificultad.");
+        String nombre_via_max = demanaString(s,50,"Introduce el nombre de la via que conseguiste tu maximo de dificultad.");
         //HAY QUE COMRPOBAR 100% QUE LA VIA EXISTA I SI ESO TAMBIEN HABRIA QUE COMPROBAR QUE LA DIFICULTAD QUE HA INTRODUCIDO SEA REALMENTE LA QUE TIENE LA VIA
-        String tipo_favorito = demanaString(s, "Introduce el tipo de escalada favorita del escalador.", "Introduce una de la siguientes opciones: 'clasica' 'deportiva' 'hielo'.");
+        String escola = demanaString(s, 50, "Introduce el nombre de la escuela de la via que conseguite tu maximo de dificultad.");
+        String tipo_favorito = demanaString(s, 50,"Introduce el tipo de escalada favorita del escalador.", "Introduce una de la siguientes opciones: 'clasica' 'deportiva' 'hielo'.");
         if (!comprobaTipus(tipo_favorito)) throw new InputMismatchException("El tipo de via favorito introducido no existe.");
-        String fita = demanaString(s, "Introduce la fita del escalador.");
-        e.create(new Escalador(nom,alies,edad,nombre_via_max,tipo_favorito,fita));
+        String fita = demanaString(s, 100,"Introduce la fita del escalador.");
+        e.create(new Escalador(nom,alies,edad,nombre_via_max,escola,tipo_favorito,fita));
     }
 
     public static boolean comprobaTipus(String est){
@@ -29,9 +30,11 @@ public class creaEscalador {
                 || est.toLowerCase().trim().equals("hielo"));
     }
 
-    private static String demanaString(Scanner s, String ... msg){
+    private static String demanaString(Scanner s, int llargada, String ... msg){
         for (String str: msg) View.mostrarMsg(str);
-        return s.nextLine();
+        String str = s.nextLine();
+        if (str.length() > llargada) throw new InputMismatchException("El maximo de caracteres permitidos son " + llargada + ".");
+        return str;
     }
 
     private static int demanaInt(String msg, Scanner s, int min, int max){
