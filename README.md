@@ -95,3 +95,5 @@ Si crees que puedes mejorar la aplicacion y añadir alguna funcionabilidad inter
 ## 📄 Licencia
 
 Este proyecto está bajo la licencia [MIT](./LICENSE).
+
+###### BY: **[Eriquito00](https://github.com/Eriquito00)** and **[Wysper](https://github.com/WysperOtaku)**
