@@ -1,4 +1,4 @@
-package controller.classes;
+package controller.classes.create;
 
 import model.classes.Escola;
 import model.dao.MySQLDAO.MySQLEscolaDAO;
@@ -6,7 +6,6 @@ import view.View;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 

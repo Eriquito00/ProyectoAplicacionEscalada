@@ -1,4 +1,4 @@
-package controller.classes;
+package controller.classes.create;
 
 import model.classes.Via;
 import model.dao.MySQLDAO.MySQLViaDAO;

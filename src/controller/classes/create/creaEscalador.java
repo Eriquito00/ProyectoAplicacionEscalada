@@ -1,4 +1,4 @@
-package controller.classes;
+package controller.classes.create;
 
 import model.classes.Escalador;
 import model.dao.MySQLDAO.MySQLEscaladorDAO;
