@@ -109,8 +109,14 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
             );
         }
         else {
-            return null; // Escalador no trobat
+            throw new SQLException("Escalador no trobat"); // Escalador no trobat
         }
+    }
+
+    public ResultSet readAll() throws SQLException {
+        String query = "SELECT * FROM escaladors";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        return pstmt.executeQuery();
     }
 
     @Override
