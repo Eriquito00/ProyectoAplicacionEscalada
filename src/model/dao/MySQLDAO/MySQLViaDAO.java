@@ -195,7 +195,7 @@ public class MySQLViaDAO implements ViaDAO {
 
     public ResultSet readAll() throws SQLException {
         String query = "SELECT v.via_id, s.nom AS sector, t.nom AS tipo, a.nom AS ancorage, tp.nom AS tipo_roca, e.nom AS escalador, d.grau AS dificultad,v.nom,v.llargada,v.numero_via,v.orientacio,v.estat " +
-                "FROM vies v" +
+                "FROM vies v " +
                 "LEFT JOIN sectors s ON v.sector_id = s.sector_id " +
                 "LEFT JOIN tipus t ON t.tipus_id = v.tipus_id " +
                 "LEFT JOIN ancoratges a ON a.ancoratge_id = v.ancoratge_id " +
