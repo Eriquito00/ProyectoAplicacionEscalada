@@ -50,7 +50,7 @@ public class MenuClasses {
                                 int s = Main.aplicaOpcio(Main.scan, 1,2);
                                 switch (s){
                                     case 1: View.mostrarMsg(mostrarTodo.mostrarSectores(c)); break;
-                                    case 2: mostrarUno.mostrarSectores(c); break;
+                                    case 2: View.mostrarMsg(mostrarUno.mostrarSectores(c).toString()); break;
                                 }
                                 break;
                         }
@@ -66,7 +66,7 @@ public class MenuClasses {
                                 int e = Main.aplicaOpcio(Main.scan, 1,2);
                                 switch (e){
                                     case 1: View.mostrarMsg(mostrarTodo.mostrarEscoles(c)); break;
-                                    case 2: mostrarUno.mostrarEscoles(c); break;
+                                    case 2: View.mostrarMsg(mostrarUno.mostrarEscoles(c).toString()); break;
                                 }
                                 break;
                         }
@@ -82,7 +82,7 @@ public class MenuClasses {
                                 int esc = Main.aplicaOpcio(Main.scan, 1,2);
                                 switch (esc){
                                     case 1: View.mostrarMsg(mostrarTodo.mostrarEscaladores(c)); break;
-                                    case 2: mostrarUno.mostrarEscaladores(c); break;
+                                    case 2: View.mostrarMsg(mostrarUno.mostrarEscaladores(c).toString()); break;
                                 }
                                 break;
                         }

@@ -19,7 +19,7 @@ public class Main {
         while (seguir){
 
             View.mostrartitulo("APLICACION DE GESTION DE ESCALADA");
-            View.mostrarMenu("Crear","Actualizar","Borrar","Consultar","Consultas Avanzadas","Salir");
+            View.mostrarMenu("Crear","Borrar","Actualizar","Consultar","Consultas Avanzadas","Salir");
             int opcion = aplicaOpcio(scan, 1, 6);
 
             try {
@@ -30,10 +30,10 @@ public class Main {
                         MenuClasses.menuClasses(opcion, "CREAR", c);
                         break;
                     case 2:
-                        MenuClasses.menuClasses(opcion, "ACTUALIZAR", c);
+                        MenuClasses.menuClasses(opcion, "BORRAR", c);
                         break;
                     case 3:
-                        MenuClasses.menuClasses(opcion, "BORRAR", c);
+                        MenuClasses.menuClasses(opcion, "ACTUALIZAR", c);
                         break;
                     case 4:
                         MenuClasses.menuClasses(opcion, "CONSULTAS", c);

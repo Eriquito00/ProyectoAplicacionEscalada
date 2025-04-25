@@ -60,6 +60,7 @@ CREATE TABLE sectors (
     CONSTRAINT pk_sector PRIMARY KEY (sector_id),
     CONSTRAINT fk_escoles_sectors FOREIGN KEY (escola_id)
 		REFERENCES escoles (escola_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE escaladors (
@@ -89,7 +90,8 @@ CREATE TABLE vies (
     estat			ENUM("Apte","Construccio","Tancada"),
     CONSTRAINT pk_vies PRIMARY KEY (via_id),
     CONSTRAINT fk_sectors_vies FOREIGN KEY (sector_id)
-		REFERENCES sectors (sector_id),
+		REFERENCES sectors (sector_id)
+		ON DELETE CASCADE,
 	CONSTRAINT fk_tipus_vies FOREIGN KEY (tipus_id)
 		REFERENCES tipus (tipus_id),
 	CONSTRAINT fk_ancoratges_vies FOREIGN KEY (ancoratge_id)
@@ -97,7 +99,8 @@ CREATE TABLE vies (
 	CONSTRAINT fk_tipus_roques_vies FOREIGN KEY (tipus_roca_id)
 		REFERENCES tipus_roques (tipus_roca_id),
 	CONSTRAINT fk_escaladors_vies FOREIGN KEY (escalador_id)
-		REFERENCES escaladors (escalador_id),
+		REFERENCES escaladors (escalador_id)
+        ON DELETE SET NULL,
 	CONSTRAINT fk_dificultats_vies FOREIGN KEY (dificultat_id)
     		REFERENCES dificultats (dificultat_id)
 );

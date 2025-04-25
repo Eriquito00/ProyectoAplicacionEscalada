@@ -134,7 +134,7 @@ public class MySQLSectorDAO implements SectorDAO {
     public ResultSet readAll() throws SQLException {
         String query = "SELECT s.sector_id, s.nom, e.nom AS escola, s.latitud, s.longitud, s.aproximacio, s.num_vies, s.popularitat, s.restriccions " +
                             "FROM sectors s " +
-                            "INNER JOIN escoles e ON e.escola_id = s.escola_id";
+                            "LEFT JOIN escoles e ON e.escola_id = s.escola_id";
         PreparedStatement pstmt = conn.prepareStatement(query);
         return pstmt.executeQuery();
     }
@@ -145,8 +145,11 @@ public class MySQLSectorDAO implements SectorDAO {
     }
 
     @Override
-    public void delete(Integer id) {
-
+    public void delete(Integer id) throws SQLException {
+        String query = "DELETE FROM sectors WHERE sector_id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1,id);
+        pstmt.executeUpdate();
     }
 
 }
