@@ -134,6 +134,14 @@ public class MySQLEscolaDAO implements EscolaDAO {
         }
     }
 
+    public ResultSet readAll() throws SQLException {
+        String query = "SELECT e.nom, p.nom AS poblacio, e.aproximacio, e.num_vies, e.popularitat, e.restriccions " +
+                        "FROM escoles e " +
+                        "INNER JOIN poblacions p ON p.poblacio_id = e.poblacio_id";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        return pstmt.executeQuery();
+    }
+
     public void update(Escola escola) {
         // Implementar la lógica para actualizar una escuela en la base de datos
     }
