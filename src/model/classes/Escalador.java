@@ -4,6 +4,7 @@ public class Escalador {
     private String nom;
     private String alies;
     private int edad;
+    private String nivell_max;
     private String nombre_via_max;
     private String escola_via_max;
     private String tipo_favorito;
@@ -15,6 +16,16 @@ public class Escalador {
         this.edad = edad;
         this.nombre_via_max = nombre_via_max;
         this.escola_via_max = escola_via_max;
+        this.tipo_favorito = tipo_favorito;
+        this.fita = fita;
+    }
+
+    public Escalador(String nom, String alies, int edad, String nivell_max, String nombre_via_max, String tipo_favorito, String fita, String escola_via_max) {
+        this.nom = nom;
+        this.alies = alies;
+        this.edad = edad;
+        this.nivell_max = nivell_max;
+        this.nombre_via_max = nombre_via_max;
         this.tipo_favorito = tipo_favorito;
         this.fita = fita;
     }

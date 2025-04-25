@@ -90,7 +90,27 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
 
     @Override
     public Escalador read(Integer key) throws SQLException {
-        return null;
+        String query = "SELECT e.nom, e.alies, e.edat, e.nivell_max, e.nom_via_max, e.tipus_fav, e.fita " +
+                       "FROM escaladors e " +
+                       "WHERE e.escalador_id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, key);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            return new Escalador(
+                    rs.getString("nom"),
+                    rs.getString("alies"),
+                    rs.getInt("edat"),
+                    rs.getString("nivell_max"),
+                    rs.getString("nom_via_max"),
+                    rs.getString("tipus_fav"),
+                    rs.getString("fita"),
+                    null // Escola no disponible a la taula escaladors
+            );
+        }
+        else {
+            return null; // Escalador no trobat
+        }
     }
 
     @Override
