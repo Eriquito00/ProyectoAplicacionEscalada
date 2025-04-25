@@ -96,7 +96,7 @@ Es recomendable usar y comprobar que estas configuraciones estan asi en nuestro 
 
 Porfavor, comprueba que Maven se ha traido las dependencias a el proyecto, si no, prueba a volver a clonar el proyecto!
 
-![img3](./img/)
+![img3](./img/img3.png)
 
 ## 🤝 Contribuciones
 
