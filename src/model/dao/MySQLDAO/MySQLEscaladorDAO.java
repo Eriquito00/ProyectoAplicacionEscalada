@@ -113,6 +113,12 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
         }
     }
 
+    public ResultSet readAll() throws SQLException {
+        String query = "SELECT * FROM escaladors";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        return pstmt.executeQuery();
+    }
+
     @Override
     public void update(Escalador o) throws SQLException {
 
