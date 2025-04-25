@@ -193,6 +193,19 @@ public class MySQLViaDAO implements ViaDAO {
             }
     }
 
+    public ResultSet readAll() throws SQLException {
+        String query = "SELECT v.via_id, s.nom AS sector, t.nom AS tipo, a.nom AS ancorage, tp.nom AS tipo_roca,d.grau AS dificultad,v.nom,v.llargada,v.numero_via,v.orientacio,v.estat \n" +
+                " FROM vies v\n" +
+                " INNER JOIN sectors s ON v.sector_id = s.sector_id \n" +
+                " INNER JOIN tipus t ON t.tipus_id = v.tipus_id \n" +
+                " INNER JOIN ancoratges a ON a.ancoratge_id = v.ancoratge_id \n" +
+                " INNER JOIN tipus_roques tp ON tp.tipus_roca_id = v.tipus_roca_id \n" +
+                " INNER JOIN escaladors e ON e.escalador_id = v.escalador_id \n" +
+                " INNER JOIN dificultats d ON d.dificultat_id = v.dificultat_id";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        return pstmt.executeQuery();
+    }
+
     @Override
     public void update(Via o) {
 

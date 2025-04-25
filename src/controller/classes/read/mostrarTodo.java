@@ -1,5 +1,7 @@
 package controller.classes.read;
 
+import model.dao.MySQLDAO.MySQLViaDAO;
+
 import java.sql.*;
 
 public class mostrarTodo {
@@ -33,11 +35,11 @@ public class mostrarTodo {
     }
 
     public static String mostrarVies(Connection c) throws SQLException {
-        // OBTENGO EL RS DE LA FUNCION DEL DAVID
-        ResultSet rs = null;
+        MySQLViaDAO viaDAO = new MySQLViaDAO(c);
+        ResultSet rs = viaDAO.readAll();
         ResultSetMetaData md = rs.getMetaData();
 
-        String tabla = String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %-60s %-15s %-15s %-15s %-15s",
+        String tabla = String.format("%-10s %-50s %-50s %-50s %-50s %-10s %-50s %-10s %-10s %-10s %-10s",
                 md.getColumnName(1),
                 md.getColumnName(2),
                 md.getColumnName(3),
@@ -48,11 +50,10 @@ public class mostrarTodo {
                 md.getColumnName(8),
                 md.getColumnName(9),
                 md.getColumnName(10),
-                md.getColumnName(11),
-                md.getColumnName(12));
+                md.getColumnName(11));
 
         while (rs.next()){
-            tabla += "\n" +  String.format("%-15s %-15s %-15s %-15s %-15s %-15s %-15s %-60s %-15s %-15s %-15s %-15s",
+            tabla += "\n" +  String.format("%-10s %-50s %-50s %-50s %-50s %-10s %-50s %-10s %-10s %-10s %-10s",
                     rs.getString(1),
                     rs.getString(2),
                     rs.getString(3),
@@ -63,8 +64,7 @@ public class mostrarTodo {
                     rs.getString(8),
                     rs.getString(9),
                     rs.getString(10),
-                    rs.getString(11),
-                    rs.getString(12));
+                    rs.getString(11));
         }
 
         return tabla;
