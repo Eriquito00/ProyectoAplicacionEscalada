@@ -156,6 +156,12 @@ public class MySQLViaDAO implements ViaDAO {
         pstmt.setString(10, o.getOrientacio());
         pstmt.setString(11, o.getEstat());
         pstmt.executeUpdate();
+
+        // Actualitzar el numero de vies del sector
+        String updateQuery = "UPDATE sectors SET num_vies = num_vies + 1 WHERE sector_id = ?";
+        PreparedStatement updatePstmt = conn.prepareStatement(updateQuery);
+        updatePstmt.setInt(1, sectorId);
+        updatePstmt.executeUpdate();
     }
     @Override
     public Via read(Integer id) throws SQLException {
