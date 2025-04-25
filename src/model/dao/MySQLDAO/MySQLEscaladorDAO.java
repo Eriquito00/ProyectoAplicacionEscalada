@@ -109,7 +109,7 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
             );
         }
         else {
-            return null; // Escalador no trobat
+            throw new SQLException("Escalador no trobat"); // Escalador no trobat
         }
     }
 
