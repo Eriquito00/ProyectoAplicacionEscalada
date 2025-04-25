@@ -60,7 +60,19 @@ docker-compose up -d
 ```
 
 3. Esto levantará el contenedor de MySQL (**mysql_escalada**) si hemos hecho todos los pasos anteriores correctamente.
-4. Ahora podemos abrir MySQL Workbench y ejecutar los scripts de inicialización están en **docker/bd-inicial.sql** para las bases de la bbdd y **docker/data-inicial.sql** para tener algunos datos por defecto.
+4. La bbdd ya tiene datos por defecto, pero, si quieres reinicializar el contenedor y que se vuelvan a ejecutar los scripts de inicio, entonces debes ejecutar:
+   
+```bash
+docker-compose down -v
+```
+
+Una vez has eliminado los volumenes del contenedor, ejecuta:
+
+```bash
+docker-compose up --build
+```
+
+Asi podras reinicializar el contenedor
 
 ## 🖥️ Uso
 
