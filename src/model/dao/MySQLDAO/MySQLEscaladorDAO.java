@@ -125,7 +125,10 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
     }
 
     @Override
-    public void delete(Integer key) throws SQLException {
-
+    public void delete(Integer id) throws SQLException {
+        String query = "DELETE FROM escaladors WHERE escalador_id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1,id);
+        pstmt.executeUpdate();
     }
 }

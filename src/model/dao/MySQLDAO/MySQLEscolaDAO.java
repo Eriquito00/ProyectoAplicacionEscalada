@@ -137,7 +137,7 @@ public class MySQLEscolaDAO implements EscolaDAO {
     public ResultSet readAll() throws SQLException {
         String query = "SELECT e.escola_id, e.nom, p.nom AS poblacio, e.aproximacio, e.num_vies, e.popularitat, e.restriccions " +
                         "FROM escoles e " +
-                        "INNER JOIN poblacions p ON p.poblacio_id = e.poblacio_id";
+                        "LEFT JOIN poblacions p ON p.poblacio_id = e.poblacio_id";
         PreparedStatement pstmt = conn.prepareStatement(query);
         return pstmt.executeQuery();
     }
@@ -146,7 +146,10 @@ public class MySQLEscolaDAO implements EscolaDAO {
         // Implementar la lógica para actualizar una escuela en la base de datos
     }
 
-    public void delete(Integer id) {
-        // Implementar la lógica para eliminar una escuela de la base de datos por su ID
+    public void delete(Integer id) throws SQLException {
+        String query = "DELETE FROM escoles WHERE escola_id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1,id);
+        pstmt.executeUpdate();
     }
 }
