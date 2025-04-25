@@ -3,6 +3,7 @@ package controller.menus;
 import controller.Main;
 import controller.classes.create.*;
 import controller.classes.delete.*;
+import controller.classes.update.*;
 import controller.classes.read.*;
 import view.View;
 
@@ -26,7 +27,7 @@ public class MenuClasses {
                         switch (opt){
                             case 1: creaVia.creaVia(Main.scan, c); break;
                             case 2: borrarObjeto.deleteVies(c); break;
-                            case 3:  break;
+                            case 3: actualizarVia.actualizaVia(c); break;
                             case 4:
                                 View.mostrartitulo("TIPOS DE CONSULTA");
                                 View.mostrarMenu("Mostrar todos", "Mostrar uno");
@@ -42,7 +43,7 @@ public class MenuClasses {
                         switch (opt){
                             case 1: creaSector.creaSector(Main.scan, c); break;
                             case 2: borrarObjeto.deleteSectores(c); break;
-                            case 3:  break;
+                            case 3: actualizarSector.actualizarSector(c); break;
                             case 4:
                                 View.mostrartitulo("TIPOS DE CONSULTA");
                                 View.mostrarMenu("Mostrar todos", "Mostrar uno");
@@ -58,7 +59,7 @@ public class MenuClasses {
                         switch (opt){
                             case 1: creaEscola.creaEscola(Main.scan, c); break;
                             case 2: borrarObjeto.deleteEscoles(c); break;
-                            case 3:  break;
+                            case 3: actualizarEscola.actualizarEscuela(c); break;
                             case 4:
                                 View.mostrartitulo("TIPOS DE CONSULTA");
                                 View.mostrarMenu("Mostrar todos", "Mostrar uno");
@@ -74,7 +75,7 @@ public class MenuClasses {
                         switch (opt){
                             case 1: creaEscalador.creaEscalador(Main.scan,c); break;
                             case 2: borrarObjeto.deleteEscaladores(c); break;
-                            case 3:  break;
+                            case 3: actualizarEscola.actualizarEscuela(c); break;
                             case 4:
                                 View.mostrartitulo("TIPOS DE CONSULTA");
                                 View.mostrarMenu("Mostrar todos", "Mostrar uno");

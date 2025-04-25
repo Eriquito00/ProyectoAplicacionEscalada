@@ -14,7 +14,8 @@ public class creaVia {
         MySQLViaDAO v = new MySQLViaDAO(c);
         String sector = demanaString(s,"Introduce el nombre del sector de la via.");
         //Comprovar que el sector existe
-        String tipus = demanaString(s,"Introduce el nombre del tipo de la via.");
+        String tipus = demanaString(s,"Introduce el nombre del tipo de la via.", "La via puede ser de los siguientes tipos: 'esportiva', 'classica' o 'gel'.");
+        if (!comprobaTipus(tipus)) throw new InputMismatchException("El valor introducido no es valido.");
         //Comprovar que el tipo de via existe
         String ancoratge = demanaString(s,"Introduce el nombre del ancorage de la via.");
         //Comprovar que el ancorage existe
@@ -23,6 +24,7 @@ public class creaVia {
         String escalador = demanaString(s,"Introduce el escalador que fundo la via.");
         //Comprovar que el escalador existe
         String dificultat = demanaString(s, "Introduce la dificultad de la via.");
+        if (!dificultatAdequada(dificultat,tipus)) throw new InputMismatchException("El valor de dificultad no es el correcto para esta via, ten en cuenta que la de tipo 'gel' el grado de dificultad comienza con 'WI'.");
         //Comprobar qeu la dificultat existe
         String nom = demanaString(s,"Introdueix el nom de la via.");
         //Hay que comprobar que en una escuela no exista el nombre de esta via
@@ -40,6 +42,16 @@ public class creaVia {
         return (est.toLowerCase().trim().equals("apte")
                 || est.toLowerCase().trim().equals("construccio")
                 || est.toLowerCase().trim().equals("tancada"));
+    }
+
+    public static boolean comprobaTipus(String est){
+        return (est.toLowerCase().trim().equals("esportiva")
+                || est.toLowerCase().trim().equals("classica")
+                || est.toLowerCase().trim().equals("gel"));
+    }
+
+    public static boolean dificultatAdequada(String dificultat, String tipus){
+        return tipus.equals("gel") && dificultat.startsWith("WI");
     }
 
     public static boolean comprobaOrientacio(String orient){

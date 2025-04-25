@@ -25,9 +25,9 @@ public class creaEscalador {
     }
 
     public static boolean comprobaTipus(String est){
-        return (est.toLowerCase().trim().equals("clasica")
-                || est.toLowerCase().trim().equals("deportiva")
-                || est.toLowerCase().trim().equals("hielo"));
+        return (est.toLowerCase().trim().equals("classica")
+                || est.toLowerCase().trim().equals("esportiva")
+                || est.toLowerCase().trim().equals("gel"));
     }
 
     private static String demanaString(Scanner s, int llargada, String ... msg){
