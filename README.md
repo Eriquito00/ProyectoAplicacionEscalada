@@ -18,12 +18,6 @@ Antes de comenzar, asegúrate de contar con lo siguiente:
 
    - Para obtener [Docker Desktop](https://www.docker.com/products/docker-desktop/) sera tan sencillo como descargar docker y dejar las opciones por defecto.
 
-- **MySQL Workbench**
-
-   - Podemos usar MySQL Workbench para ejecutar los scripts de inicializacion de la base de datos que incluyen la estructura de la base de datos y algunos datos de prueba.
-
-   - Para obtener MySQL Workbench podemos [descargar MySQL Workbench](https://dev.mysql.com/downloads/workbench/) en el enlace y dejar la configuracion por defecto.
-
 - **Maven (no necesario si se usa IntelliJ)**
 
    - Maven lo usaremos para obtener todas las dependencias que necesitamos en el proyecto para que todo funcione perfectamente.
@@ -99,6 +93,10 @@ Es recomendable usar y comprobar que estas configuraciones estan asi en nuestro 
    - Es importante configurar las carpetas de source, que es donde estan todos los archivos .java y out que es donde estaran las builds de nuestro proyecto una vez compilemos, una vez hecho esto podemos usar la aplicacion sin problemas.
 
 ![img2](./img/image2.png)
+
+Porfavor, comprueba que Maven se ha traido las dependencias a el proyecto, si no, prueba a volver a clonar el proyecto!
+
+![img3](./img/)
 
 ## 🤝 Contribuciones
 
