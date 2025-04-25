@@ -17,6 +17,15 @@ public class Escola {
         this.restriccions = restriccions;
     }
 
+    public Escola(String poblacio, String nom, String aproximacio, int num_vies, String popularitat, String restriccions) {
+        this.poblacio = poblacio;
+        this.nom = nom;
+        this.aproximacio = aproximacio;
+        this.num_vies = num_vies;
+        this.popularitat = popularitat;
+        this.restriccions = restriccions;
+    }
+
     public String getPoblacio() {
         return poblacio;
     }
