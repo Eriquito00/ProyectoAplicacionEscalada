@@ -162,6 +162,12 @@ public class MySQLViaDAO implements ViaDAO {
         PreparedStatement updatePstmt = conn.prepareStatement(updateQuery);
         updatePstmt.setInt(1, sectorId);
         updatePstmt.executeUpdate();
+
+        // Actualitzar el numero de vies de l'escola
+        String updateEscolaQuery = "UPDATE escoles SET num_vies = num_vies + 1 WHERE escola_id = (SELECT escola_id FROM sectors WHERE sector_id = ?)";
+        PreparedStatement updateEscolaPstmt = conn.prepareStatement(updateEscolaQuery);
+        updateEscolaPstmt.setInt(1, sectorId);
+        updateEscolaPstmt.executeUpdate();
     }
     @Override
     public Via read(Integer id) throws SQLException {
@@ -174,7 +180,6 @@ public class MySQLViaDAO implements ViaDAO {
                         "INNER JOIN escaladors e ON v.escalador_id = e.escalador_id " +
                         "INNER JOIN dificultats d ON v.dificultat_id = d.dificultat_id " +
                         "WHERE v.via_id = ?";
-        try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -186,12 +191,7 @@ public class MySQLViaDAO implements ViaDAO {
             } else {
                 throw new SQLException("La via no existeix a la base de dades");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null; // Error en la consulta
-        }
     }
-
 
     @Override
     public void update(Via o) {

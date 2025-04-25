@@ -108,13 +108,12 @@ public class MySQLSectorDAO implements SectorDAO {
     }
 
     @Override
-    public Sector read(Integer id) {
+    public Sector read(Integer id) throws SQLException {
         String query = "SELECT e.nom AS escola, s.nom, s.latitud, s.longitud, s.aproximacio, s.num_vies, s.popularitat, s.restriccions " +
                             "FROM sectors s " +
                             "INNER JOIN escoles e ON e.escola_id = s.escola_id " +
                         "WHERE sector_id = ?";
 
-        try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -128,12 +127,8 @@ public class MySQLSectorDAO implements SectorDAO {
                         rs.getString("popularitat"),
                         rs.getString("restriccions"));
             } else {
-                return null; // Sector no trobat
+                throw new SQLException("Sector no trobat");// Sector no trobat
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null; // Error en la consulta
-        }
     }
 
     @Override
