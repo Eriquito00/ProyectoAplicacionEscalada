@@ -131,6 +131,14 @@ public class MySQLSectorDAO implements SectorDAO {
             }
     }
 
+    public ResultSet readAll() throws SQLException {
+        String query = "SELECT s.sector_id, s.nom, e.nom AS escola, s.latitud, s.longitud, s.aproximacio, s.num_vies, s.popularitat, s.restriccions " +
+                            "FROM sectors s " +
+                            "INNER JOIN escoles e ON e.escola_id = s.escola_id";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        return pstmt.executeQuery();
+    }
+
     @Override
     public void update(Sector o) {
 
