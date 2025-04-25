@@ -66,8 +66,6 @@ public class MySQLEscolaDAO implements EscolaDAO {
 
     // CRUD
 
-    // TODO: TESTEAR ESTO SI O SI ERIC, POR DIOS, ARREGLA UN POCO ESTO, ES DEMASIADO TOCHA
-
     /**
      * Crear una nova escola a la base de dades
      * @param escola Escola a crear
@@ -113,9 +111,35 @@ public class MySQLEscolaDAO implements EscolaDAO {
         pstmt.executeUpdate();
     }
 
-    public Escola read(Integer id) {
-        // Implementar la lógica para leer una escuela de la base de datos por su ID
-        return null;
+    public Escola read(Integer id) throws SQLException {
+        String query = "SELECT p.nom AS poblacio, e.nom, e.aproximacio, e.num_vies, e.popularitat, e.restriccions " +
+                        "FROM escoles e " +
+                        "INNER JOIN poblacions p ON p.poblacio_id = e.poblacio_id " +
+                        "WHERE escola_id = ?";
+
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            return new Escola(
+                    rs.getString("poblacio"),
+                    rs.getString("nom"),
+                    rs.getString("aproximacio"),
+                    rs.getInt("num_vies"),
+                    rs.getString("popularitat"),
+                    rs.getString("restriccions")
+            );
+        } else {
+            throw new SQLException("Escola no trobada"); // Escola no trobada
+        }
+    }
+
+    public ResultSet readAll() throws SQLException {
+        String query = "SELECT e.escola_id, e.nom, p.nom AS poblacio, e.aproximacio, e.num_vies, e.popularitat, e.restriccions " +
+                        "FROM escoles e " +
+                        "INNER JOIN poblacions p ON p.poblacio_id = e.poblacio_id";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        return pstmt.executeQuery();
     }
 
     public void update(Escola escola) {
