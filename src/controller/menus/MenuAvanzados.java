@@ -15,8 +15,16 @@ public class MenuAvanzados {
         while (seguir){
 
             View.mostrartitulo(titulo);
-            View.mostrarMenu("Mostra les vies d'una Escola que estan disponibles","Consulta2","Consulta3","Consulta4","Consulta5", "Consulta6", "Consulta7","Salir");
-            int opcion = Main.aplicaOpcio(Main.scan, 1, 8);
+            View.mostrarMenu("Mostra les vies d'una Escola que estan disponibles",
+                    "Cercar vies per dificultat en un rang específic (via, grau, sector, escola)",
+                    "Cercar vies segons estat (Apte, Construcció, Tancada)",
+                    "Consultar escoles amb restriccions actives actualment",
+                    "Mostrar sectors amb més de X vies disponibles",
+                    "Mostrar escaladors amb el mateix nivell màxim assolit",
+                    "Mostrar les vies que han passat a \"Apte\" recentment",
+                    "Mostrar les vies més llargues d’una escola determinada",
+                    "Salir");
+            int opcion = Main.aplicaOpcio(Main.scan, 1, 9);
 
             try {
                 switch (opcion){
@@ -42,6 +50,9 @@ public class MenuAvanzados {
                         //Consulta avanzada 7
                         break;
                     case 8:
+                        //Consulta avanzada 8
+                        break;
+                    case 9:
                         seguir = false;
                         View.mostrarMsg("Volviendo al menu principal...");
                         break;
