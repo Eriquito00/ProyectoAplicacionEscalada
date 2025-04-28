@@ -88,6 +88,7 @@ CREATE TABLE vies (
     numero_via		INT UNSIGNED,
     orientacio		ENUM("N","NE","NO","SE","SO","E","O","S"),
     estat			ENUM("Apte","Construccio","Tancada"),
+    ultim_apte		DATE,
     CONSTRAINT pk_vies PRIMARY KEY (via_id),
     CONSTRAINT fk_sectors_vies FOREIGN KEY (sector_id)
 		REFERENCES sectors (sector_id)

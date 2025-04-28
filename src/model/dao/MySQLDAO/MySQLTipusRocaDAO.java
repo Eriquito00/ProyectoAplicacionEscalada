@@ -13,7 +13,7 @@ public class MySQLTipusRocaDAO {
     }
 
     public int getTipusRocaIdByNom(String nom) {
-        String query = "SELECT tipus_roca_id FROM tipus_roca WHERE nom = ?";
+        String query = "SELECT tipus_roca_id FROM tipus_roques WHERE nom = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, nom);

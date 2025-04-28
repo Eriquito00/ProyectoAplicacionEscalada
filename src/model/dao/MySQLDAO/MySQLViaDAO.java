@@ -83,9 +83,9 @@ public class MySQLViaDAO implements ViaDAO {
 
     @Override
     public Boolean existeVia(String nom, String escolaNom) {
-        String query = "SELECT v.via_id FROM vies v " +
-                        "INNER JOIN sectors s ON v.sector_id = s.sector_id" +
-                        "WHERE v.nom = ? AND s.escola_id = (SELECT escola_id FROM escoles WHERE nom = ?)";
+        String query = "SELECT v.via_id FROM vies v" +
+                        " INNER JOIN sectors s ON v.sector_id = s.sector_id" +
+                        " WHERE v.nom = ? AND s.escola_id = (SELECT escola_id FROM escoles WHERE nom = ?)";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, nom);
@@ -107,7 +107,7 @@ public class MySQLViaDAO implements ViaDAO {
             throw new SQLException("La connexió a la base de dades és null");
         }
 
-        String query = "INSERT INTO vies (sector_id, tipus_id, ancoratge_id, tipus_roca_id, escalador_id, dificultat_id, nom, llargada, numero_via, orientacio, estat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO vies (sector_id, tipus_id, ancoratge_id, tipus_roca_id, escalador_id, dificultat_id, nom, llargada, numero_via, orientacio, estat, ultim_apte) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CASE WHEN estat = \"apte\" THEN CURDATE() ELSE null END)";
         PreparedStatement pstmt = conn.prepareStatement(query);
         MySQLSectorDAO mySQLSectorDAO = new MySQLSectorDAO(conn);
         MySQLTipusDAO mySQLTipusDAO = new MySQLTipusDAO(conn);
@@ -174,7 +174,7 @@ public class MySQLViaDAO implements ViaDAO {
     }
     @Override
     public Via read(Integer id) throws SQLException {
-        String query = "SELECT v.nom, s.nom AS sector, t.nom AS tipus, a.nom AS ancoratge, tr.nom AS tipus_roca, e.nom AS escalador, d.grau AS dificultat, v.llargada, v.numero_via, v.orientacio, v.estat " +
+        String query = "SELECT v.nom, s.nom AS sector, t.nom AS tipus, a.nom AS ancoratge, tr.nom AS tipus_roca, e.nom AS escalador, d.grau AS dificultat, v.llargada, v.numero_via, v.orientacio, v.estat, v.ultim_apte " +
                         "FROM vies v " +
                         "INNER JOIN sectors s ON v.sector_id = s.sector_id " +
                         "INNER JOIN tipus t ON v.tipus_id = t.tipus_id " +
@@ -197,7 +197,7 @@ public class MySQLViaDAO implements ViaDAO {
     }
 
     public ResultSet readAll() throws SQLException {
-        String query = "SELECT v.via_id, s.nom AS sector, t.nom AS tipo, a.nom AS ancorage, tp.nom AS tipo_roca, e.nom AS escalador, d.grau AS dificultad,v.nom,v.llargada,v.numero_via,v.orientacio,v.estat " +
+        String query = "SELECT v.via_id, s.nom AS sector, t.nom AS tipo, a.nom AS ancorage, tp.nom AS tipo_roca, e.nom AS escalador, d.grau AS dificultad,v.nom,v.llargada,v.numero_via,v.orientacio,v.estat, v.ultim_apte " +
                 "FROM vies v " +
                 "LEFT JOIN sectors s ON v.sector_id = s.sector_id " +
                 "LEFT JOIN tipus t ON t.tipus_id = v.tipus_id " +
