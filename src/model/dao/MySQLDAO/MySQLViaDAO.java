@@ -231,8 +231,7 @@ public class MySQLViaDAO implements ViaDAO {
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1,esc);
         ResultSet rs = pstmt.executeQuery();
-        //CON EL rs.next LEE EL PRIMERO Y NO SE OBTIENE Y HAY QUE HACER UN TRIM I UN TOLOWER CON EL STRING
-        if (rs.next()) return rs;
+        if (rs.isBeforeFirst()) return rs;
         else throw new SQLException("La escuela introducida no tiene ninguna via.");
     }
 
@@ -248,8 +247,7 @@ public class MySQLViaDAO implements ViaDAO {
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1,dif);
         ResultSet rs = pstmt.executeQuery();
-        //CON EL rs.next LEE EL PRIMERO Y NO SE OBTIENE Y HAY QUE HACER UN TRIM I UN TOLOWER CON EL STRING
-        if (rs.next()) return rs;
+        if (rs.isBeforeFirst()) return rs;
         else throw new SQLException("La dificultad introducida no tiene ninguna via.");
     }
 }

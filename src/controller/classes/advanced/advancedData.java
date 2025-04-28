@@ -15,7 +15,7 @@ public class advancedData {
     public static String escolesDisponibles (Connection c) throws SQLException {
         MySQLViaDAO viaDAO = new MySQLViaDAO(c);
         String escola = demanaString(Main.scan,50, "Introduce el nombre de la escuela que quieres saber que vias estan activas.");
-        ResultSet rs = viaDAO.viesEscola(escola);
+        ResultSet rs = viaDAO.viesEscola(escola.trim().toLowerCase());
         ResultSetMetaData rsmd = rs.getMetaData();
 
         String tabla = String.format("%-50s %-10s %-10s %-50s %-10s %-50s %-50s",
@@ -44,7 +44,7 @@ public class advancedData {
     public static String viesDificultat (Connection c) throws SQLException {
         MySQLViaDAO viaDAO = new MySQLViaDAO(c);
         String dificultad = demanaString(Main.scan,3, "Introduce la dificultad de la que quieres obtener las vias.");
-        ResultSet rs = viaDAO.viesDificultat(dificultad);
+        ResultSet rs = viaDAO.viesDificultat(dificultad.trim().toLowerCase());
         ResultSetMetaData rsmd = rs.getMetaData();
 
         String tabla = String.format("%-50s %-10s %-50s %-50s",
