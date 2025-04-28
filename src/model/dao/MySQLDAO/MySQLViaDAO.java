@@ -212,6 +212,7 @@ public class MySQLViaDAO implements ViaDAO {
     @Override
     public void update(Via o) throws SQLException {
         String query = "UPDATE vies SET " +
+                        "sector_id = ?, " +
                         "tipus_id = ?, " +
                         "ancoratge_id = ?, " +
                         "tipus_roca_id = ?, " +
@@ -228,7 +229,64 @@ public class MySQLViaDAO implements ViaDAO {
         MySQLSectorDAO mySQLSectorDAO = new MySQLSectorDAO(conn);
         // TODO: hace falta traerse la ID de la via en el objeto, nuevo constructor en todas las clases con id, solo para actualizar
         // SI EL NOMBRE Y EL SECTOR NO CAMBIAN NO HARIA FALTA, PERO SI LO ACTUALIZAN YA NO SE PODRIA ENCONTRAR
+
+        //Update sector
+        int sectorId = mySQLSectorDAO.getSectorIdByNom(o.getSector());
+        if (sectorId == -1) {
+            throw new SQLException("El sector no existeix a la base de dades");
+        }
+        pstmt.setInt(1, sectorId);
+
+        //Update tipus
+        int tipusId = new MySQLTipusDAO(conn).getTipusIdByNom(o.getTipus());
+        if (tipusId == -1) {
+            throw new SQLException("El tipus no existeix a la base de dades");
+        }
+        pstmt.setInt(2, tipusId);
+
+        //Update ancoratge
+        int ancoratgeId = new MySQLAncoratgeDAO(conn).getAncoratgeIdByNom(o.getAncoratge());
+        if (ancoratgeId == -1) {
+            throw new SQLException("L'ancoratge no existeix a la base de dades");
+        }
+        pstmt.setInt(3, ancoratgeId);
+
+        //Update tipus roca
+        int tipusRocaId = new MySQLTipusRocaDAO(conn).getTipusRocaIdByNom(o.getTipus_roca());
+        if (tipusRocaId == -1) {
+            throw new SQLException("El tipus de roca no existeix a la base de dades");
+        }
+        pstmt.setInt(4, tipusRocaId);
+
+        //Update escalador
+        int escaladorId = new MySQLEscaladorDAO(conn).getEscaladorIdByNom(o.getEscalador());
+        if (escaladorId == -1) {
+            throw new SQLException("L'escalador no existeix a la base de dades");
+        }
+        pstmt.setInt(5, escaladorId);
+
+        //Update dificultat
+        int dificultatId = new MySQLDificultatDAO(conn).getDificultatIdByNom(o.getDificultat());
+        if (dificultatId == -1) {
+            throw new SQLException("La dificultat no existeix a la base de dades");
+        }
+        pstmt.setInt(6, dificultatId);
+        pstmt.setString(7, o.getNom());
+        pstmt.setInt(8, o.getLlargada());
+        pstmt.setInt(9, o.getNumero_via());
+        pstmt.setString(10, o.getOrientacio());
+        //TODO: hará falta actualizar un campo historial y una ficha si ha pasado a ser apte
+        pstmt.setString(11, o.getEstat());
+        pstmt.setInt(12, o.getId());
+        pstmt.executeUpdate();
+
+        // Actualitzar el numero de vies del sector
+        String updateQuery = "UPDATE sectors SET num_vies = num_vies + 1 WHERE sector_id = ?";
+        PreparedStatement updatePstmt = conn.prepareStatement(updateQuery);
+        updatePstmt.setInt(1, sectorId);
+        updatePstmt.executeUpdate();
     }
+
     @Override
     public void delete(Integer id) throws SQLException {
         String query = "DELETE FROM vies WHERE via_id = ?";
