@@ -1,25 +1,30 @@
 package controller.menus;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import controller.Main;
 import view.View;
+import controller.classes.advanced.advancedData;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class MenuAvanzados {
-    public static void menuConsultasAvanzadas(String titulo){
+    public static void menuConsultasAvanzadas(String titulo, Connection c){
         boolean seguir = true;
 
         while (seguir){
 
             View.mostrartitulo(titulo);
-            View.mostrarMenu("Consulta1","Consulta2","Consulta3","Consulta4","Consulta5","Salir");
-            int opcion = Main.aplicaOpcio(Main.scan, 1, 6);
+            View.mostrarMenu("Mostra les vies d'una Escola que estan disponibles","Consulta2","Consulta3","Consulta4","Consulta5", "Consulta6", "Consulta7","Salir");
+            int opcion = Main.aplicaOpcio(Main.scan, 1, 8);
 
             try {
                 switch (opcion){
                     case 1:
-                        //Consulta avanzada 1
+                        View.mostrarMsg(advancedData.escolesDisponibles(c));
                         break;
                     case 2:
-                        //Consulta avanzada 2
+                        View.mostrarMsg(advancedData.viesDificultat(c));
                         break;
                     case 3:
                         //Consulta avanzada 3
@@ -31,13 +36,18 @@ public class MenuAvanzados {
                         //Consulta avanzada 5
                         break;
                     case 6:
+                        //Consulta avanzada 6
+                        break;
+                    case 7:
+                        //Consulta avanzada 7
+                        break;
+                    case 8:
                         seguir = false;
                         View.mostrarMsg("Volviendo al menu principal...");
                         break;
                 }
             }
-            catch (RuntimeException e){
-                //Hay que cambiar que en vez de runtime sea SQLExeption
+            catch (SQLException e){
                 System.out.println(e.getMessage());
             }
         }
