@@ -1,6 +1,7 @@
 package model.classes;
 
 public class Escalador {
+    private int id;
     private String nom;
     private String alies;
     private int edad;
@@ -21,6 +22,17 @@ public class Escalador {
     }
 
     public Escalador(String nom, String alies, int edad, String nivell_max, String nombre_via_max, String tipo_favorito, String fita, String escola_via_max) {
+        this.nom = nom;
+        this.alies = alies;
+        this.edad = edad;
+        this.nivell_max = nivell_max;
+        this.nombre_via_max = nombre_via_max;
+        this.tipo_favorito = tipo_favorito;
+        this.fita = fita;
+    }
+
+    public Escalador(int id, String nom, String alies, int edad, String nivell_max, String nombre_via_max, String tipo_favorito, String fita) {
+        this.id = id;
         this.nom = nom;
         this.alies = alies;
         this.edad = edad;

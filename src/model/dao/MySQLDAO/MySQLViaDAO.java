@@ -227,8 +227,7 @@ public class MySQLViaDAO implements ViaDAO {
         PreparedStatement pstmt = conn.prepareStatement(query);
         MySQLSectorDAO mySQLSectorDAO = new MySQLSectorDAO(conn);
         // TODO: hace falta traerse la ID de la via en el objeto, nuevo constructor en todas las clases con id, solo para actualizar
-        int viaId = getViaIdByNom(o.getNom(),mySQLSectorDAO.getEscola(o.getSector()));
-
+        // SI EL NOMBRE Y EL SECTOR NO CAMBIAN NO HARIA FALTA, PERO SI LO ACTUALIZAN YA NO SE PODRIA ENCONTRAR
     }
     @Override
     public void delete(Integer id) throws SQLException {
