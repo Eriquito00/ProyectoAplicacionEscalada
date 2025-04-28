@@ -39,8 +39,7 @@ public class Main {
                         MenuClasses.menuClasses(opcion, "CONSULTAS", c);
                         break;
                     case 5:
-                        MenuAvanzados.menuConsultasAvanzadas("CONSULTAS AVANZADAS");
-                        //HACE FALTA PASARLE LA CONEXION
+                        MenuAvanzados.menuConsultasAvanzadas("CONSULTAS AVANZADAS", c);
                         break;
                     case 6:
                         seguir = false;

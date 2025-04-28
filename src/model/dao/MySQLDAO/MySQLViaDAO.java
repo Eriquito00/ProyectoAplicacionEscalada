@@ -236,4 +236,37 @@ public class MySQLViaDAO implements ViaDAO {
         pstmt.setInt(1,id);
         pstmt.executeUpdate();
     }
+
+    public ResultSet viesEscola (String esc) throws SQLException{
+        MySQLEscolaDAO escolaDAO = new MySQLEscolaDAO(conn);
+        if (!escolaDAO.existeEscola(esc)) throw new SQLException("El nombre de la escuela introducida no existe.");
+        String query = "SELECT v.nom, v.numero_via, v.orientacio, t.nom AS tipus, d.grau AS dificultat, s.nom AS sector, e.nom AS escola" +
+                " FROM vies v" +
+                " INNER JOIN tipus t ON t.tipus_id = v.tipus_id" +
+                " INNER JOIN dificultats d ON d.dificultat_id = v.dificultat_id" +
+                " INNER JOIN sectors s ON s.sector_id = v.sector_id" +
+                " INNER JOIN escoles e ON e.escola_id = s.escola_id" +
+                " WHERE e.nom = ? AND v.estat = \"apte\"";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1,esc);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.isBeforeFirst()) return rs;
+        else throw new SQLException("La escuela introducida no tiene ninguna via.");
+    }
+
+    public ResultSet viesDificultat (String dif) throws SQLException{
+        MySQLDificultatDAO dificultatDAO = new MySQLDificultatDAO(conn);
+        if (dificultatDAO.getDificultatIdByNom(dif) == -1) throw new SQLException("La dificultad introducida no existe.");
+        String query = "SELECT v.nom, d.grau AS dificultad, s.nom AS sector, e.nom AS escola" +
+                " FROM vies v" +
+                " INNER JOIN dificultats d ON d.dificultat_id = v.dificultat_id" +
+                " INNER JOIN sectors s ON s.sector_id = v.sector_id" +
+                " INNER JOIN escoles e ON e.escola_id = s.escola_id" +
+                " WHERE d.grau = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1,dif);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.isBeforeFirst()) return rs;
+        else throw new SQLException("La dificultad introducida no tiene ninguna via.");
+    }
 }

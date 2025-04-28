@@ -22,20 +22,15 @@ public class MySQLDificultatDAO {
      * @param nom Nom de la dificultat
      * @return id de la dificultat amb aquell nom o -1 si no existeix
      */
-    public int getDificultatIdByNom(String nom) {
+    public int getDificultatIdByNom(String nom) throws SQLException{
         String query = "SELECT dificultat_id FROM dificultats WHERE grau = ?";
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, nom);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("dificultat_id");
-            } else {
-                return -1; // Dificultat no trobada
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return -1; // Error en la consulta
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, nom);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("dificultat_id");
+        } else {
+            return -1; // Dificultat no trobada
         }
     }
 
