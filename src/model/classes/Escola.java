@@ -1,6 +1,7 @@
 package model.classes;
 
 public class Escola {
+    private int id;
     private String poblacio;
     private String nom;
     private String aproximacio;
@@ -22,6 +23,15 @@ public class Escola {
         this.nom = nom;
         this.aproximacio = aproximacio;
         this.num_vies = num_vies;
+        this.popularitat = popularitat;
+        this.restriccions = restriccions;
+    }
+
+    public Escola(int id, String poblacio, String nom, String aproximacio, String popularitat, String restriccions) {
+        this.id = id;
+        this.poblacio = poblacio;
+        this.nom = nom;
+        this.aproximacio = aproximacio;
         this.popularitat = popularitat;
         this.restriccions = restriccions;
     }
