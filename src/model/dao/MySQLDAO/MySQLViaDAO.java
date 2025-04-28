@@ -190,7 +190,7 @@ public class MySQLViaDAO implements ViaDAO {
                 return new Via(rs.getString("sector"), rs.getString("tipus"), rs.getString("ancoratge"),
                         rs.getString("tipus_roca"), rs.getString("escalador"), rs.getString("dificultat"),
                         rs.getString("nom"), rs.getInt("llargada"), rs.getInt("numero_via"),
-                        rs.getString("orientacio"), rs.getString("estat"));
+                        rs.getString("orientacio"), rs.getString("estat"), rs.getString("ultim_apte"));
             } else {
                 throw new SQLException("La via no existeix a la base de dades");
             }
