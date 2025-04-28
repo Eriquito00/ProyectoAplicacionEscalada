@@ -39,11 +39,14 @@ public class MySQLViaDAO implements ViaDAO {
     }
 
     @Override
-    public int getViaIdByNom(String nom) {
-        String query = "SELECT via_id FROM vies WHERE nom = ?";
+    public int getViaIdByNom(String nom, String escolaNom) {
+        String query = "SELECT v.via_id FROM vies v " +
+                        "INNER JOIN sectors s ON v.sector_id = s.sector_id " +
+                        "WHERE v.nom = ? AND s.escola_id = (SELECT escola_id FROM escoles WHERE nom = ?)";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setString(1, nom);
+            pstmt.setString(2, escolaNom);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 return rs.getInt("via_id");
@@ -207,7 +210,24 @@ public class MySQLViaDAO implements ViaDAO {
     }
 
     @Override
-    public void update(Via o) {
+    public void update(Via o) throws SQLException {
+        String query = "UPDATE vies SET " +
+                        "tipus_id = ?, " +
+                        "ancoratge_id = ?, " +
+                        "tipus_roca_id = ?, " +
+                        "escalador_id = ?, " +
+                        "dificultat_id = ?, " +
+                        "nom = ?, " +
+                        "llargada = ?, " +
+                        "numero_via = ?, " +
+                        "orientacio = ?, " +
+                        "estat = ? " +
+                        "WHERE via_id = ?";
+
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        MySQLSectorDAO mySQLSectorDAO = new MySQLSectorDAO(conn);
+        // TODO: hace falta traerse la ID de la via en el objeto, nuevo constructor en todas las clases con id, solo para actualizar
+        int viaId = getViaIdByNom(o.getNom(),mySQLSectorDAO.getEscola(o.getSector()));
 
     }
     @Override

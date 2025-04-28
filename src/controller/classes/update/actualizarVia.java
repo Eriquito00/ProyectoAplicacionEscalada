@@ -11,7 +11,7 @@ public class actualizarVia {
         boolean seguir = true;
 
         while (seguir) {
-
+            // TODO: Hace falta que me pases tambien la ID de la via en el objeto via cuando te traigas la via de la bbdd, si no no la podremos actualizar!!!!!!!!
             View.mostrartitulo("ACTUALIZAR VIAS");
             View.mostrarMenu("Sector", "Tipo", "Ancorage", "Tipo de roca", "Escalador","Dificultad","Nombre","Longitud","Numero de via","Orientacion","Estado","Volver");
             int opcion = Main.aplicaOpcio(Main.scan, 1, 12);
