@@ -51,7 +51,8 @@ public class creaVia {
     }
 
     public static boolean dificultatAdequada(String dificultat, String tipus){
-        return tipus.equals("gel") && dificultat.startsWith("WI");
+        if(tipus.equals("gel") && !dificultat.startsWith("WI")) return false;
+        return true;
     }
 
     public static boolean comprobaOrientacio(String orient){

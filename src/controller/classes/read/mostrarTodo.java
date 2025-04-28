@@ -41,7 +41,7 @@ public class mostrarTodo {
         ResultSet rs = viaDAO.readAll();
         ResultSetMetaData md = rs.getMetaData();
 
-        String tabla = String.format("%-10s %-50s %-50s %-50s %-50s %-50s %-10s %-50s %-10s %-10s %-10s %-10s",
+        String tabla = String.format("%-10s %-50s %-50s %-50s %-50s %-50s %-10s %-50s %-10s %-10s %-10s %-15s %-15s",
                 md.getColumnLabel(1),
                 md.getColumnLabel(2),
                 md.getColumnLabel(3),
@@ -53,10 +53,11 @@ public class mostrarTodo {
                 md.getColumnLabel(9),
                 md.getColumnLabel(10),
                 md.getColumnLabel(11),
-                md.getColumnLabel(12));
+                md.getColumnLabel(12),
+                md.getColumnLabel(13));
 
         while (rs.next()){
-            tabla += "\n" +  String.format("%-10s %-50s %-50s %-50s %-50s %-50s %-10s %-50s %-10s %-10s %-10s %-10s",
+            tabla += "\n" +  String.format("%-10s %-50s %-50s %-50s %-50s %-50s %-10s %-50s %-10s %-10s %-10s %-15s %-15s",
                     rs.getString(1),
                     rs.getString(2),
                     rs.getString(3),
@@ -68,7 +69,8 @@ public class mostrarTodo {
                     rs.getString(9),
                     rs.getString(10),
                     rs.getString(11),
-                    rs.getString(12));
+                    rs.getString(12),
+                    rs.getString(13));
         }
 
         return tabla;
