@@ -16,7 +16,7 @@ public class Via {
     private String ultim_apte;
     private Tram[] trams;
 
-    // CREAR VIAS
+    // CREAR VIAS ESPORTIVES
     public Via(String sector, String tipus, String ancoratge, String tipus_roca, String escalador, String dificultat, String nom, int llargada, int numero_via, String orientacio, String estat) {
         this.sector = sector;
         this.tipus = tipus;
@@ -29,6 +29,20 @@ public class Via {
         this.numero_via = numero_via;
         this.orientacio = orientacio;
         this.estat = estat;
+    }
+
+    // CREAR VIAS CLASICAS I GEL
+    public Via(String sector, String tipus, String ancoratge, String tipus_roca,String escalador, String nom, int numero_via, String orientacio, String estat, Tram[] trams) {
+        this.sector = sector;
+        this.tipus = tipus;
+        this.ancoratge = ancoratge;
+        this.tipus_roca = tipus_roca;
+        this.escalador = escalador;
+        this.nom = nom;
+        this.numero_via = numero_via;
+        this.orientacio = orientacio;
+        this.estat = estat;
+        this.trams = trams;
     }
 
     // LEER VIAS

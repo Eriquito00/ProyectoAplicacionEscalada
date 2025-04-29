@@ -24,4 +24,12 @@ public class Tram {
     public void setDificultat(String dificultat) {
         this.dificultat = dificultat;
     }
+
+    @Override
+    public String toString() {
+        return "Tram{" +
+                "llargada=" + llargada +
+                ", dificultat='" + dificultat + '\'' +
+                '}';
+    }
 }
