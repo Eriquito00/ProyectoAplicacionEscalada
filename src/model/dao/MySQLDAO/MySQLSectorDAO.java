@@ -68,6 +68,18 @@ public class MySQLSectorDAO implements SectorDAO {
         return rs.next(); // Si hi ha resultats, el sector existeix
     }
 
+    public ResultSet sectorNumVies(int num_min) throws SQLException{
+        String query = "SELECT s.nom, e.nom, s.latitud, s.longitud, s.aproximacio, s.num_vies, s.popularitat, s.restriccions" +
+                " FROM sectors s" +
+                " INNER JOIN escoles e ON e.escola_id = s.escola_id" +
+                " WHERE s.num_vies > ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1,num_min);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.isBeforeFirst()) return rs;
+        else throw new SQLException("No hay sectores con tantas vias.");
+    }
+
     // CRUD
 
     @Override

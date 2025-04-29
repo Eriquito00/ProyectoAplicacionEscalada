@@ -18,7 +18,7 @@ public class creaEscalador {
         String nombre_via_max = demanaString(s,50,"Introduce el nombre de la via que conseguiste tu maximo de dificultad.");
         //HAY QUE COMRPOBAR 100% QUE LA VIA EXISTA I SI ESO TAMBIEN HABRIA QUE COMPROBAR QUE LA DIFICULTAD QUE HA INTRODUCIDO SEA REALMENTE LA QUE TIENE LA VIA
         String escola = demanaString(s, 50, "Introduce el nombre de la escuela de la via que conseguite tu maximo de dificultad.");
-        String tipo_favorito = demanaString(s, 50,"Introduce el tipo de escalada favorita del escalador.", "Introduce una de la siguientes opciones: 'clasica' 'deportiva' 'hielo'.");
+        String tipo_favorito = demanaString(s, 50,"Introduce el tipo de escalada favorita del escalador.", "Introduce una de la siguientes opciones: 'classica' 'esportiva' 'gel'.");
         if (!comprobaTipus(tipo_favorito)) throw new InputMismatchException("El tipo de via favorito introducido no existe.");
         String fita = demanaString(s, 100,"Introduce la fita del escalador.");
         e.create(new Escalador(nom,alies,edad,nombre_via_max,escola,tipo_favorito,fita));

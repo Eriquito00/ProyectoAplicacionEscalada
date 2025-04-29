@@ -51,7 +51,13 @@ SELECT e.nom, e.alies, e.edat, e.nivell_max, e.nom_via_max, e.tipus_fav, e.fita
 	FROM escaladors e
 WHERE e.nivell_max = ?;
 
-/* 7 Mostrar les vies més llargues d’una escola determinada */
+/* 7 Mostrar les vies que han passat a "Apte" recentment */
+
+SELECT v.nom, v.llargada, v.numero_via, v.orientacio, v.estat, v.ultim_apte
+	FROM vies v
+WHERE v.ultim_apte > CURDATE() - 30;
+
+/* 8 Mostrar les vies més llargues d’una escola determinada */
 
 SELECT v.nom, v.llargada, v.numero_via, v.orientacio, t.nom AS tipus, d.grau AS dificultat, s.nom AS sector, e.nom AS escola
 	FROM vies v
@@ -59,5 +65,5 @@ SELECT v.nom, v.llargada, v.numero_via, v.orientacio, t.nom AS tipus, d.grau AS 
     INNER JOIN dificultats d ON d.dificultat_id = v.dificultat_id
     INNER JOIN sectors s ON s.sector_id = v.sector_id
     INNER JOIN escoles e ON e.escola_id = s.escola_id
-WHERE e.nom = ?
+WHERE e.nom = ? AND v.llargada = (SELECT MAX(v1.llargada) FROM vies v1 INNER JOIN sectors s ON s.sector_id = v1.sector_id INNER JOIN escoles e ON e.escola_id = s.escola_id WHERE e.nom = ?)
 ORDER BY v.llargada DESC;

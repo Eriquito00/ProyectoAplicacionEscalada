@@ -35,22 +35,22 @@ public class MenuAvanzados {
                         View.mostrarMsg(advancedData.viesDificultat(c));
                         break;
                     case 3:
-                        //Consulta avanzada 3
+                        View.mostrarMsg(advancedData.viesEstat(c));
                         break;
                     case 4:
-                        //Consulta avanzada 4
+                        View.mostrarMsg(advancedData.escolesRestriccions(c));
                         break;
                     case 5:
-                        //Consulta avanzada 5
+                        View.mostrarMsg(advancedData.sectorsNumVies(c));
                         break;
                     case 6:
-                        //Consulta avanzada 6
+                        View.mostrarMsg(advancedData.escaladorsDificultat(c));
                         break;
                     case 7:
-                        //Consulta avanzada 7
+                        View.mostrarMsg(advancedData.viesAptesRecents(c));
                         break;
                     case 8:
-                        //Consulta avanzada 8
+                        View.mostrarMsg(advancedData.viesescolaLlargues(c));
                         break;
                     case 9:
                         seguir = false;

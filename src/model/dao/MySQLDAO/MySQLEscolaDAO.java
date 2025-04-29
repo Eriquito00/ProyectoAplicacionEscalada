@@ -64,6 +64,17 @@ public class MySQLEscolaDAO implements EscolaDAO {
         }
     }
 
+    public ResultSet escolaRestriccions() throws SQLException{
+        String query = "SELECT e.nom, p.nom AS poblacio, e.aproximacio, e.num_vies, e.popularitat, e.restriccions" +
+                " FROM escoles e" +
+                " INNER JOIN poblacions p ON p.poblacio_id = e.poblacio_id" +
+                " WHERE e.restriccions RLIKE \".*\"";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.isBeforeFirst()) return rs;
+        else throw new SQLException("No hay escuelas con restricciones.");
+    }
+
     // CRUD
 
     /**

@@ -60,6 +60,19 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
         }
     }
 
+    public ResultSet escaladorDificultat(String dif) throws SQLException{
+        MySQLDificultatDAO dificultatDAO = new MySQLDificultatDAO(conn);
+        if (dificultatDAO.getDificultatIdByNom(dif) == -1) throw new SQLException("La dificultad introducida no existe.");
+        String query = "SELECT e.nom, e.alies, e.edat, e.nivell_max, e.nom_via_max, e.tipus_fav, e.fita" +
+                " FROM escaladors e" +
+                " WHERE e.nivell_max = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1,dif);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.isBeforeFirst()) return rs;
+        else throw new SQLException("La dificultad introducida no tiene ninguna via.");
+    }
+
     // CRUD
 
     @Override
