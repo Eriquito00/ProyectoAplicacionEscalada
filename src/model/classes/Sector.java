@@ -1,6 +1,7 @@
 package model.classes;
 
 public class Sector {
+    private int id;
     private String escola;
     private String nom;
     private String latitud;
@@ -30,6 +31,25 @@ public class Sector {
         this.num_vies = num_vies;
         this.popularitat = popularitat;
         this.restriccions = restriccions;
+    }
+
+    public Sector(int id, String escola, String nom, String latitud, String longitud, String aproximacio, String popularitat, String restriccions) {
+        this.id = id;
+        this.escola = escola;
+        this.nom = nom;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.aproximacio = aproximacio;
+        this.popularitat = popularitat;
+        this.restriccions = restriccions;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEscola() {

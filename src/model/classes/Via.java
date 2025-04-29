@@ -13,8 +13,9 @@ public class Via {
     private int numero_via;
     private String orientacio;
     private String estat;
+    private String ultim_apte;
 
-    // TODO: Afegir un constructor amb la ID per poder actualitzar la via a la bbdd
+    // CREAR VIAS
     public Via(String sector, String tipus, String ancoratge, String tipus_roca, String escalador, String dificultat, String nom, int llargada, int numero_via, String orientacio, String estat) {
         this.sector = sector;
         this.tipus = tipus;
@@ -29,6 +30,23 @@ public class Via {
         this.estat = estat;
     }
 
+    // LEER VIAS
+    public Via(String sector, String tipus, String ancoratge, String tipus_roca, String escalador, String dificultat, String nom, int llargada, int numero_via, String orientacio, String estat, String ultim_apte) {
+        this.sector = sector;
+        this.tipus = tipus;
+        this.ancoratge = ancoratge;
+        this.tipus_roca = tipus_roca;
+        this.escalador = escalador;
+        this.dificultat = dificultat;
+        this.nom = nom;
+        this.llargada = llargada;
+        this.numero_via = numero_via;
+        this.orientacio = orientacio;
+        this.estat = estat;
+        this.ultim_apte = ultim_apte;
+    }
+
+    // UPDATEAR VIAS
     public Via(int id,String sector, String tipus, String ancoratge, String tipus_roca, String escalador, String dificultat, String nom, int llargada, int numero_via, String orientacio, String estat) {
         this.id = id;
         this.sector = sector;
@@ -152,6 +170,7 @@ public class Via {
                         "%-15s %-25s\n" +
                         "%-15s %-15s\n" +
                         "%-15s %-15s\n" +
+                        "%-15s %-15s\n" +
                         "%-15s %-15s\n",
                 "Sector:", sector,
                 "Tipo:", tipus,
@@ -162,6 +181,7 @@ public class Via {
                 "Longitud:", llargada,
                 "Numero via:", numero_via,
                 "Orientacion:", orientacio,
-                "Estado:", estat);
+                "Estado:", estat,
+                "Ultimo Apto:", ultim_apte);
     }
 }
