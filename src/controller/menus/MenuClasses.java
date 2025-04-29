@@ -75,7 +75,7 @@ public class MenuClasses {
                         switch (opt){
                             case 1: creaEscalador.creaEscalador(Main.scan,c); break;
                             case 2: borrarObjeto.deleteEscaladores(c); break;
-                            case 3: actualizarEscola.actualizarEscuela(c); break;
+                            case 3: actualizarEscalador.actualizarEscalador(c); break;
                             case 4:
                                 View.mostrartitulo("TIPOS DE CONSULTA");
                                 View.mostrarMenu("Mostrar todos", "Mostrar uno");
