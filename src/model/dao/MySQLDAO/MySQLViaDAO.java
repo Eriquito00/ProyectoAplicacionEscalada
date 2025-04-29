@@ -1,5 +1,6 @@
 package model.dao.MySQLDAO;
 
+import model.classes.Tram;
 import model.classes.Via;
 import model.dao.interfaces.ViaDAO;
 
@@ -116,6 +117,7 @@ public class MySQLViaDAO implements ViaDAO {
         MySQLDificultatDAO mySQLDificultatDAO = new MySQLDificultatDAO(conn);
         MySQLTipusRocaDAO mySQLTipusRocaDAO = new MySQLTipusRocaDAO(conn);
         MySQLViaDAO mySQLViaDAO = new MySQLViaDAO(conn);
+        MySQLTramDAO mySQLTramDAO = new MySQLTramDAO(conn);
 
         int sectorId = mySQLSectorDAO.getSectorIdByNom(o.getSector());
         if (sectorId == -1) {
@@ -158,7 +160,29 @@ public class MySQLViaDAO implements ViaDAO {
         pstmt.setInt(9, o.getNumero_via());
         pstmt.setString(10, o.getOrientacio());
         pstmt.setString(11, o.getEstat());
+
         pstmt.executeUpdate();
+
+        // Obtener el ID generado de la via
+        ResultSet rs = pstmt.getGeneratedKeys();
+        int viaId = -1;
+        if (rs.next()) {
+            viaId = rs.getInt(1);
+        } else {
+            throw new SQLException("No s'ha pogut obtenir l'ID de la via creada.");
+        }
+
+        // Insertar tramos segun el tipo de via
+        if (!o.getTipus().equalsIgnoreCase("esportiva")) {
+            // Para clásica o gel
+            for (Tram tramo : o.getTrams()) {
+                mySQLTramDAO.insertTram(viaId, tramo);
+            }
+        } else {
+            // Para esportiva: un único tramo igual que la via
+            Tram tramo = new Tram(o.getLlargada(), o.getDificultat());
+            mySQLTramDAO.insertTram(viaId, tramo);
+        }
 
         // Actualitzar el numero de vies del sector
         String updateQuery = "UPDATE sectors SET num_vies = num_vies + 1 WHERE sector_id = ?";
@@ -172,6 +196,7 @@ public class MySQLViaDAO implements ViaDAO {
         updateEscolaPstmt.setInt(1, sectorId);
         updateEscolaPstmt.executeUpdate();
     }
+
     @Override
     public Via read(Integer id) throws SQLException {
         String query = "SELECT v.nom, s.nom AS sector, t.nom AS tipus, a.nom AS ancoratge, tr.nom AS tipus_roca, e.nom AS escalador, d.grau AS dificultat, v.llargada, v.numero_via, v.orientacio, v.estat, v.ultim_apte " +

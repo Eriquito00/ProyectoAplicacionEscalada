@@ -14,6 +14,7 @@ public class Via {
     private String orientacio;
     private String estat;
     private String ultim_apte;
+    private Tram[] trams;
 
     // CREAR VIAS
     public Via(String sector, String tipus, String ancoratge, String tipus_roca, String escalador, String dificultat, String nom, int llargada, int numero_via, String orientacio, String estat) {
@@ -156,6 +157,14 @@ public class Via {
 
     public void setDificultat(String dificultat) {
         this.dificultat = dificultat;
+    }
+
+    public String getUltim_apte() {
+        return ultim_apte;
+    }
+
+    public Tram[] getTrams() {
+        return trams;
     }
 
     @Override
