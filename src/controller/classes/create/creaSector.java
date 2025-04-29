@@ -2,7 +2,7 @@ package controller.classes.create;
 
 import model.classes.Sector;
 import model.dao.MySQLDAO.MySQLSectorDAO;
-import view.View;
+import static controller.functions.DemanaDades.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,26 +26,5 @@ public class creaSector {
         if (!comprobaPopularitat(popularitat)) throw new InputMismatchException("El valor de popularitat introduit no es valid.");
         String restriccions = demanaString(s, 100,"Introduce la restriccio del sector.");
         sec.create(new Sector(escola,nom,latitud,longitud,aproximacio,popularitat,restriccions));
-    }
-
-    public static boolean comprobaLatitud(String latitud){
-        return latitud.matches("^(90|[1-8]?[0-9])º([0-5]?[0-9])\'([0-5]?[0-9])\"[NS]$");
-    }
-
-    public static boolean comprobaLongitud(String longitud){
-        return longitud.matches("^(180|[1-9]?[0-9])º([0-5]?[0-9])\'([0-5]?[0-9])\"[OE]$");
-    }
-
-    public static boolean comprobaPopularitat(String pop){
-        return (pop.toLowerCase().trim().equals("baixa")
-                || pop.toLowerCase().trim().equals("mitjana")
-                || pop.toLowerCase().trim().equals("alta"));
-    }
-
-    private static String demanaString(Scanner s, int llargada, String ... msg){
-        for (String str: msg) View.mostrarMsg(str);
-        String str = s.nextLine();
-        if (str.length() > llargada) throw new InputMismatchException("El maximo de caracteres permitidos son " + llargada + ".");
-        return str;
     }
 }

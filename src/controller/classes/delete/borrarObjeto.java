@@ -4,11 +4,10 @@ import controller.Main;
 import controller.classes.read.mostrarTodo;
 import model.dao.MySQLDAO.*;
 import view.View;
+import static controller.functions.DemanaDades.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class borrarObjeto {
     public static void deleteEscoles(Connection c) throws SQLException {
@@ -37,12 +36,5 @@ public class borrarObjeto {
         View.mostrarMsg(mostrarTodo.mostrarEscaladores(c));
         int id = demanaInt("Introduce la ID del escalador que quieres eliminar.",Main.scan,1,2000000);
         escaladorDAO.delete(id);
-    }
-
-    private static int demanaInt(String msg, Scanner s, int min, int max){
-        View.mostrarMsg(msg);
-        int n = Integer.parseInt(s.nextLine());
-        if (n < min || n > max) throw new InputMismatchException("El valor introducido no existe.");
-        return n;
     }
 }

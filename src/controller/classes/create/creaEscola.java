@@ -2,7 +2,7 @@ package controller.classes.create;
 
 import model.classes.Escola;
 import model.dao.MySQLDAO.MySQLEscolaDAO;
-import view.View;
+import static controller.functions.DemanaDades.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,18 +20,5 @@ public class creaEscola {
         if (!comprobaPopularitat(popularitat)) throw new InputMismatchException("El valor de popularitat introduit no es valid.");
         String restriccions = demanaString(s,100,"Introduce las restricciones de la escuela.");
         e.create(new Escola(poblacio,nom,aproximacio,popularitat,restriccions));
-    }
-
-    public static boolean comprobaPopularitat(String pop){
-        return (pop.toLowerCase().trim().equals("baixa")
-                || pop.toLowerCase().trim().equals("mitjana")
-                || pop.toLowerCase().trim().equals("alta"));
-    }
-
-    private static String demanaString(Scanner s, int llargada, String ... msg){
-        for (String str: msg) View.mostrarMsg(str);
-        String str = s.nextLine();
-        if (str.length() > llargada) throw new InputMismatchException("El maximo de caracteres permitidos son " + llargada + ".");
-        return str;
     }
 }

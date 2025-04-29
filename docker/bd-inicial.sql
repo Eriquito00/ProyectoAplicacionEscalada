@@ -103,15 +103,18 @@ CREATE TABLE vies (
 		REFERENCES escaladors (escalador_id)
         ON DELETE SET NULL,
 	CONSTRAINT fk_dificultats_vies FOREIGN KEY (dificultat_id)
-    		REFERENCES dificultats (dificultat_id)
+    	REFERENCES dificultats (dificultat_id)
 );
 
 CREATE TABLE trams (
-   tram_id INT AUTO_INCREMENT PRIMARY KEY,
-   via_id INT NOT NULL,
-   dificultat_id INT NOT NULL,
-   llargada DOUBLE NOT NULL,
-   numero_tram INT NOT NULL,
-   FOREIGN KEY (via_id) REFERENCES vies(via_id) ON DELETE CASCADE,
-   FOREIGN KEY (dificultat_id) REFERENCES dificultats(dificultat_id)
+   tram_id          INT UNSIGNED AUTO_INCREMENT,
+   via_id           INT UNSIGNED,
+   dificultat_id    INT UNSIGNED,
+   llargada         INT UNSIGNED,
+   numero_tram      INT UNSIGNED,
+   CONSTRAINT pk_trams PRIMARY KEY (tram_id),
+   CONSTRAINT fk_vies_trams FOREIGN KEY (via_id)
+        REFERENCES vies (via_id),
+   CONSTRAINT fk_dificultats_trams FOREIGN KEY (dificultat_id)
+        REFERENCES dificultats (dificultat_id)
 );

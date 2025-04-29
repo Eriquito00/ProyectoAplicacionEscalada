@@ -5,14 +5,12 @@ import model.dao.MySQLDAO.MySQLEscaladorDAO;
 import model.dao.MySQLDAO.MySQLEscolaDAO;
 import model.dao.MySQLDAO.MySQLSectorDAO;
 import model.dao.MySQLDAO.MySQLViaDAO;
-import view.View;
+import static controller.functions.DemanaDades.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class advancedData {
     public static String escolesDisponibles (Connection c) throws SQLException {
@@ -210,7 +208,7 @@ public class advancedData {
 
     public static String viesescolaLlargues (Connection c) throws SQLException {
         MySQLViaDAO viaDAO = new MySQLViaDAO(c);
-        String escola = demanaString(Main.scan,50,"Introduce el numero de vias minimo que tiene que tener el sector.");
+        String escola = demanaString(Main.scan,50,"Introduce el nombre de la escuela que quieres saber las vias mas largas.");
         ResultSet rs = viaDAO.viesescolaLlargues(escola);
         ResultSetMetaData rsmd = rs.getMetaData();
 
@@ -237,19 +235,5 @@ public class advancedData {
         }
 
         return tabla;
-    }
-
-    private static String demanaString(Scanner s, int llargada, String ... msg){
-        for (String str: msg) View.mostrarMsg(str);
-        String str = s.nextLine();
-        if (str.length() > llargada) throw new InputMismatchException("El maximo de caracteres permitidos son " + llargada + ".");
-        return str;
-    }
-
-    private static int demanaInt(String msg, Scanner s, int min, int max){
-        View.mostrarMsg(msg);
-        int n = Integer.parseInt(s.nextLine());
-        if (n < min || n > max) throw new InputMismatchException("El valor introducido esta fuera de las opciones.");
-        return n;
     }
 }

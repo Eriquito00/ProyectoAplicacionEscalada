@@ -3,11 +3,9 @@ package controller.classes.read;
 import controller.Main;
 import model.classes.*;
 import model.dao.MySQLDAO.*;
-import view.View;
+import static controller.functions.DemanaDades.*;
 
 import java.sql.*;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class mostrarUno {
     public static Escola mostrarEscoles(Connection c) throws SQLException {
@@ -32,12 +30,5 @@ public class mostrarUno {
         MySQLEscaladorDAO escaladorDAO = new MySQLEscaladorDAO(c);
         int id = demanaInt("Introduce la ID del escalador que quieres consultar.",Main.scan,1,2000000);
         return escaladorDAO.read(id);
-    }
-
-    private static int demanaInt(String msg, Scanner s, int min, int max){
-        View.mostrarMsg(msg);
-        int n = Integer.parseInt(s.nextLine());
-        if (n < min || n > max) throw new InputMismatchException("El valor introducido no existe.");
-        return n;
     }
 }
