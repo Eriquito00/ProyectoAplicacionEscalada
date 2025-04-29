@@ -227,10 +227,23 @@ public class MySQLViaDAO implements ViaDAO {
             throw new SQLException("L'escalador no existeix a la base de dades");
         }
         pstmt.setInt(5, escaladorId);
-        int dificultatId = mySQLDificultatDAO.getDificultatIdByNom(o.getDificultat());
-        if (dificultatId == -1) {
-            throw new SQLException("La dificultat no existeix a la base de dades");
+
+        int dificultatId = -1;
+        if(!o.getTipus().equalsIgnoreCase("esportiva")) {
+            for (Tram tram : o.getTrams()) {
+                dificultatId = mySQLDificultatDAO.getDificultatIdByNom(tram.getDificultat());
+                if (dificultatId == -1) {
+                    throw new SQLException("La dificultat del tram " + tram.toString() + " no existeix a la base de dades");
+                }
+            }
         }
+        else {
+            dificultatId = mySQLDificultatDAO.getDificultatIdByNom(o.getDificultat());
+            if (dificultatId == -1) {
+                throw new SQLException("La dificultat no existeix a la base de dades");
+            }
+        }
+
         pstmt.setInt(6, dificultatId);
         pstmt.setString(7, o.getNom());
         pstmt.setInt(8, o.getLlargada());
