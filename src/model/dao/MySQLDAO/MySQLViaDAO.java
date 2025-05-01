@@ -109,7 +109,7 @@ public class MySQLViaDAO implements ViaDAO {
         }
 
         String query = "INSERT INTO vies (sector_id, tipus_id, ancoratge_id, tipus_roca_id, escalador_id, dificultat_id, nom, llargada, numero_via, orientacio, estat, ultim_apte) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CASE WHEN estat = \"apte\" THEN CURDATE() ELSE null END)";
-        PreparedStatement pstmt = conn.prepareStatement(query);
+        PreparedStatement pstmt = conn.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
         MySQLSectorDAO mySQLSectorDAO = new MySQLSectorDAO(conn);
         MySQLTipusDAO mySQLTipusDAO = new MySQLTipusDAO(conn);
         MySQLAncoratgeDAO mySQLAncoratgeDAO = new MySQLAncoratgeDAO(conn);
@@ -203,7 +203,7 @@ public class MySQLViaDAO implements ViaDAO {
             }
         } else {
             // Para esportiva: un único tramo igual que la via
-            Tram tramo = new Tram(o.getLlargada(), o.getDificultat());
+            Tram tramo = new Tram(o.getLlargada(), o.getDificultat(), 1);
             mySQLTramDAO.insertTram(viaId, tramo);
         }
 
