@@ -244,6 +244,16 @@ public class MySQLViaDAO implements ViaDAO {
             }
         }
 
+        int llargada = 0;
+        if(o.getTipus().equalsIgnoreCase("esportiva")) {
+            llargada = o.getLlargada();
+        }
+        else {
+            for (Tram tram : o.getTrams()) {
+                llargada += tram.getLlargada();
+            }
+        }
+
         pstmt.setInt(6, dificultatId);
         pstmt.setString(7, o.getNom());
         pstmt.setInt(8, o.getLlargada());
