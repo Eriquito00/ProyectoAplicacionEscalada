@@ -95,6 +95,7 @@ public class MenuClasses {
             }
             catch (SQLException | InputMismatchException e){
                 View.mostrarMsg(e.getMessage());
+                e.printStackTrace();
             }
         }
     }

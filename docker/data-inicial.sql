@@ -87,3 +87,44 @@ INSERT INTO vies (sector_id, tipus_id, ancoratge_id, tipus_roca_id, escalador_id
 (5, 2, 8, 5, 3, 22, "El crit de la muntanya", 45, 18, "N", "apte", CURDATE()),
 (1, 1, 1, 3, 4, 31, "Verticalitat pura", 28, 19, "SE", "construccio", NULL),
 (2, 2, 4, 2, 5, 2, "L'ombra del cim", 50, 20, "S", "tancada", NULL);
+
+-- Insertar datos en la tabla trams
+INSERT INTO trams (via_id, dificultat_id, llargada, numero_tram) VALUES
+-- Vía ID 2
+(2, 1, 10, 1),
+(2, 2, 10, 2),
+(2, 2, 10, 3),
+-- Vía ID 4
+(4, 10, 15, 1),
+(4, 11, 15, 2),
+(4, 12, 20, 3),
+-- Vía ID 6
+(6, 1, 20, 1),
+(6, 1, 20, 2),
+-- Vía ID 8
+(8, 2, 20, 1),
+(8, 3, 20, 2),
+(8, 4, 20, 3),
+-- Vía ID 9
+(9, 1, 20, 1),
+(9, 2, 25, 2),
+-- Vía ID 12
+(12, 1, 15, 1),
+(12, 2, 25, 2),
+-- Vía ID 13
+(13, 2, 20, 1),
+(13, 3, 35, 2),
+-- Vía ID 15
+(15, 16, 13, 1),
+(15, 17, 13, 2),
+(15, 18, 12, 3),
+-- Vía ID 17
+(17, 14, 20, 1),
+(17, 15, 20, 2),
+(17, 16, 20, 3),
+-- Vía ID 18
+(18, 2, 20, 1),
+(18, 3, 25, 2),
+-- Vía ID 20
+(20, 1, 25, 1),
+(20, 2, 25, 2);

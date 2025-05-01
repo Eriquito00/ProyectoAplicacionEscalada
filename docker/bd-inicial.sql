@@ -114,7 +114,8 @@ CREATE TABLE trams (
    numero_tram      INT UNSIGNED,
    CONSTRAINT pk_trams PRIMARY KEY (tram_id),
    CONSTRAINT fk_vies_trams FOREIGN KEY (via_id)
-        REFERENCES vies (via_id),
+        REFERENCES vies (via_id)
+        ON DELETE CASCADE,
    CONSTRAINT fk_dificultats_trams FOREIGN KEY (dificultat_id)
         REFERENCES dificultats (dificultat_id)
 );
