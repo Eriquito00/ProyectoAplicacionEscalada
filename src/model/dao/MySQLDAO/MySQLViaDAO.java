@@ -231,7 +231,9 @@ public class MySQLViaDAO implements ViaDAO {
         int dificultatId = -1;
         if(!o.getTipus().equalsIgnoreCase("esportiva")) {
             for (Tram tram : o.getTrams()) {
-                dificultatId = mySQLDificultatDAO.getDificultatIdByNom(tram.getDificultat());
+                if (mySQLDificultatDAO.getDificultatIdByNom(tram.getDificultat()) > dificultatId) {
+                    dificultatId = mySQLDificultatDAO.getDificultatIdByNom(tram.getDificultat());
+                }
                 if (dificultatId == -1) {
                     throw new SQLException("La dificultat del tram " + tram.toString() + " no existeix a la base de dades");
                 }
@@ -256,7 +258,7 @@ public class MySQLViaDAO implements ViaDAO {
 
         pstmt.setInt(6, dificultatId);
         pstmt.setString(7, o.getNom());
-        pstmt.setInt(8, o.getLlargada());
+        pstmt.setInt(8, llargada);
         pstmt.setInt(9, o.getNumero_via());
         pstmt.setString(10, o.getOrientacio());
         pstmt.setString(11, o.getEstat());
