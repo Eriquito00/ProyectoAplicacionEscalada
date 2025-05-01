@@ -15,16 +15,17 @@ public class MySQLTramDAO {
 
     public void insertTram (int viaId, Tram tram) throws SQLException {
         MySQLDificultatDAO mySQLDificultatDAO = new MySQLDificultatDAO(conn);
-        String query = "INSERT INTO trams (via_id, llargada, dificultat_id) VALUES (?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        String query = "INSERT INTO trams (via_id, dificultat_id, llargada, numero_tram) VALUES (?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, viaId);
-            stmt.setInt(2, tram.getLlargada());
+            stmt.setInt(3, tram.getLlargada());
             int dificultatId = mySQLDificultatDAO.getDificultatIdByNom(tram.getDificultat());
             if (dificultatId == -1) {
                 throw new SQLException("La dificultat del tram no existeix");
             }
-            stmt.setInt(3, dificultatId);
+            stmt.setInt(2, dificultatId);
+            stmt.setInt(4, tram.getNumero_tram());
             stmt.executeUpdate();
-        }
+
     }
 }
