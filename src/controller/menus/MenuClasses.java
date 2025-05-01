@@ -33,7 +33,7 @@ public class MenuClasses {
                                 View.mostrarMenu("Mostrar todos", "Mostrar uno");
                                 int v = Main.aplicaOpcio(Main.scan, 1,2);
                                 switch (v){
-                                    case 1: View.mostrarMsg(mostrarTodo.mostrarVies(c)); break;
+                                    case 1: View.mostrarMsg(mostrarTodo.mostrarVies(c) + "\n\n"); View.mostrarMsg("\n\n" + mostrarTodo.mostrarTramos(c)); break;
                                     case 2: View.mostrarMsg(mostrarUno.mostrarVies(c).toString()); break;
                                 }
                                 break;
@@ -93,9 +93,8 @@ public class MenuClasses {
                         break;
                 }
             }
-            catch (SQLException | InputMismatchException e){
+            catch (SQLException | RuntimeException e){
                 View.mostrarMsg(e.getMessage());
-                e.printStackTrace();
             }
         }
     }

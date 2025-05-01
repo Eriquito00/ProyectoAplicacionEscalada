@@ -310,17 +310,17 @@ public class MySQLViaDAO implements ViaDAO {
                         "INNER JOIN escaladors e ON v.escalador_id = e.escalador_id " +
                         "INNER JOIN dificultats d ON v.dificultat_id = d.dificultat_id " +
                         "WHERE v.via_id = ?";
-            PreparedStatement pstmt = conn.prepareStatement(query);
-            pstmt.setInt(1, id);
-            ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return new Via(rs.getString("sector"), rs.getString("tipus"), rs.getString("ancoratge"),
-                        rs.getString("tipus_roca"), rs.getString("escalador"), rs.getString("dificultat"),
-                        rs.getString("nom"), rs.getInt("llargada"), rs.getInt("numero_via"),
-                        rs.getString("orientacio"), rs.getString("estat"), rs.getString("ultim_apte"));
-            } else {
-                throw new SQLException("La via no existeix a la base de dades");
-            }
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setInt(1, id);
+        ResultSet rs = pstmt.executeQuery();
+        if (rs.next()) {
+            return new Via(rs.getString("sector"), rs.getString("tipus"), rs.getString("ancoratge"),
+                    rs.getString("tipus_roca"), rs.getString("escalador"), rs.getString("dificultat"),
+                    rs.getString("nom"), rs.getInt("llargada"), rs.getInt("numero_via"),
+                    rs.getString("orientacio"), rs.getString("estat"), rs.getString("ultim_apte"));
+        } else {
+            throw new SQLException("La via no existeix a la base de dades");
+        }
     }
 
     public ResultSet readAll() throws SQLException {

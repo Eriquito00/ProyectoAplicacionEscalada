@@ -4,7 +4,6 @@ import controller.Main;
 import model.classes.Tram;
 import model.classes.Via;
 import model.dao.MySQLDAO.MySQLViaDAO;
-import view.View;
 
 import static controller.functions.DemanaDades.*;
 
@@ -27,10 +26,10 @@ public class creaVia {
         int numero_via = demanaInt("Introdueix el numero de la via.", s, 1, 1000000);
         String orientacio = demanaString(s,2,"Introdueix la orientacio de la via.");
         if (!comprobaOrientacio(orientacio)) throw new InputMismatchException("La orientacio introduida no es valida.");
-        String estat = demanaString(s,15,"Introdueix l'estat de la via.");
+        String estat = demanaString(s,15,"Introdueix l'estat de la via. ('apte','construccio','tancada')");
         if (!comprobaEstat(estat)) throw new InputMismatchException("El estado introducido no es valido.");
 
-        if (tipus.matches("^esportiva$")){
+        if (tipus.equals("esportiva")){
             String dificultat = demanaString(s, 3,"Introduce la dificultad de la via.");
             if (!dificultatAdequada(dificultat,tipus)) throw new InputMismatchException("El valor de dificultad no es el correcto para esta via, ten en cuenta que la de tipo 'gel' el grado de dificultad comienza con 'WI'.");
             int llargada = demanaInt("Introdueix la llargada de la via.", s, 0, 50);
@@ -38,13 +37,12 @@ public class creaVia {
             return;
         }
 
-        // HAY UN PROBLEMA QUE SI INTRODUCE LOS DATOS Y TODO LO DE LOS TRAMOS SI HAY ALGUNA COSA QUE NO ESTA BIEN TODA LA CREACION DE LOS TRAMOS I DE LA VIA NO SE GUARDARA
-
         ArrayList<Tram> trams = new ArrayList<>();
         String crearTramos = "";
         for (int i = 1; !crearTramos.matches("no") ; i++) {
-            trams.add(creaTram.creaTram(i));
-            crearTramos = demanaString(Main.scan,2,"Tramo introducido con exito." + "\n" + "Introduce 'no' para parar de introducir tramos, qualquier otra cosa para seguir añadiendo tramos.").trim().toLowerCase();
+            trams.add(creaTram.creaTram(i, tipus));
+            if (trams.size() >= 2) crearTramos = demanaString(Main.scan,2,"Tramo introducido con exito." + "\n" + "Introduce 'no' para parar de introducir tramos, qualquier otra cosa para seguir añadiendo tramos.").trim().toLowerCase();
         }
+        v.create(new Via(sector,tipus,ancoratge,tipus_roca,escalador,nom,numero_via,orientacio,estat,trams.toArray(Tram[]::new)));
     }
 }
