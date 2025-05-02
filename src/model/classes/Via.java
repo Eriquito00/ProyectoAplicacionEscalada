@@ -62,16 +62,12 @@ public class Via {
     }
 
     // UPDATEAR VIAS
-    public Via(int id,String sector, String tipus, String ancoratge, String tipus_roca, String escalador, String dificultat, String nom, int llargada, int numero_via, String orientacio, String estat) {
+    public Via(int id, String ancoratge, String tipus_roca, String escalador, String nom, int numero_via, String orientacio, String estat) {
         this.id = id;
-        this.sector = sector;
-        this.tipus = tipus;
         this.ancoratge = ancoratge;
         this.tipus_roca = tipus_roca;
         this.escalador = escalador;
-        this.dificultat = dificultat;
         this.nom = nom;
-        this.llargada = llargada;
         this.numero_via = numero_via;
         this.orientacio = orientacio;
         this.estat = estat;
