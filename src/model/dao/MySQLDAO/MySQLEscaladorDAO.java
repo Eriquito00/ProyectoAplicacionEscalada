@@ -134,7 +134,21 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
 
     @Override
     public void update(Escalador o) throws SQLException {
-
+        String query = "UPDATE escaladors SET nom = ?, alies = ?, edat = ?, nivell_max = ?, nom_via_max = ?, tipus_fav = ?, fita = ? WHERE escalador_id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, o.getNom());
+        pstmt.setString(2, o.getAlies());
+        pstmt.setInt(3, o.getEdad());
+        String dificultat = new MySQLViaDAO(conn).getDificultatByNom(o.getNombre_via_max(), o.getEscola_via_max());
+        if (dificultat == null) {
+            throw new SQLException("La via no existeix a la base de dades");
+        }
+        pstmt.setString(4, dificultat);
+        pstmt.setString(5, o.getNombre_via_max());
+        pstmt.setString(6, o.getTipo_favorito());
+        pstmt.setString(7, o.getFita());
+        pstmt.setInt(8, o.getId());
+        pstmt.executeUpdate();
     }
 
     @Override

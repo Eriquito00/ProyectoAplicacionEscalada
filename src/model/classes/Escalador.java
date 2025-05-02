@@ -31,6 +31,7 @@ public class Escalador {
         this.fita = fita;
     }
 
+    // Constructor per actualitzar escaladors
     public Escalador(int id, String nom, String alies, int edad, String nombre_via_max, String escola_via_max, String tipo_favorito, String fita) {
         this.id = id;
         this.nom = nom;
@@ -42,7 +43,21 @@ public class Escalador {
         this.fita = fita;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNivell_max() {
+        return nivell_max;
+    }
+
+    public void setNivell_max(String nivell_max) {
+        this.nivell_max = nivell_max;
+    }
 
     public String getNom() {
         return nom;
