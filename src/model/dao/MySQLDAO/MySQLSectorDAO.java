@@ -152,8 +152,32 @@ public class MySQLSectorDAO implements SectorDAO {
     }
 
     @Override
-    public void update(Sector o) {
+    public void update(Sector o)  throws SQLException {
+        String query = "UPDATE sectors SET escola_id = ?, nom = ?, latitud = ?, longitud = ?, aproximacio = ?, num_vies = (SELECT COUNT(via_id) FROM vies v WHERE s.sector_id = ?), popularitat = ?, restriccions = ? WHERE sector_id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        int escolaId = new MySQLEscolaDAO(conn).getEscolaIdByNom(o.getEscola());
+        if (escolaId == -1) throw new SQLException("La escola indicada no existeix a la base de dades");
 
+        pstmt.setInt(1, escolaId);
+        pstmt.setString(2, o.getNom());
+        pstmt.setString(3, o.getLatitud());
+        pstmt.setString(4, o.getLongitud());
+
+        if (o.getAproximacio().equals("")) {
+            pstmt.setString(5, null); // Si aproximacio es buida, posar null
+        } else {
+            pstmt.setString(5, o.getAproximacio());
+        }
+        pstmt.setInt(6, o.getId());
+        pstmt.setString(7, o.getPopularitat());
+
+        if (o.getRestriccions().equals("")) {
+            pstmt.setString(8, null); // Si restriccions es buida, posar null
+        } else {
+            pstmt.setString(8, o.getRestriccions());
+        }
+        pstmt.setInt(9, o.getId());
+        pstmt.executeUpdate();
     }
 
     @Override

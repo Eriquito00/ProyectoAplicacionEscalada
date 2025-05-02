@@ -33,6 +33,7 @@ public class Sector {
         this.restriccions = restriccions;
     }
 
+    // Constructor per actualitzar sectors
     public Sector(int id, String escola, String nom, String latitud, String longitud, String aproximacio, String popularitat, String restriccions) {
         this.id = id;
         this.escola = escola;
