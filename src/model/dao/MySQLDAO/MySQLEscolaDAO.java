@@ -153,8 +153,24 @@ public class MySQLEscolaDAO implements EscolaDAO {
         return pstmt.executeQuery();
     }
 
-    public void update(Escola escola) {
-        // Implementar la lógica para actualizar una escuela en la base de datos
+    public void update(Escola escola) throws SQLException {
+        String query = "UPDATE escoles SET poblacio_id = ?, nom = ?, aproximacio = ?, " +
+                        "num_vies = (SELECT COUNT(via_id) FROM vies v INNER JOIN sectors s ON s.sector_id = v.sector_id " +
+                                    "INNER JOIN escoles e ON s.escola_id = e.escola_id WHERE e.escola_id = ?), " +
+                        "popularitat = ?, restriccions = ? WHERE escola_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            // Comprovar que la poblacio existeix a la base de dades
+            if (new MySQLPoblacionsDAO(conn).getIdPoblacioByNom(escola.getPoblacio()) == -1) {
+                throw new SQLException("La població no existeix a la base de dades");
+            }
+            pstmt.setInt(1, new MySQLPoblacionsDAO(conn).getIdPoblacioByNom(escola.getPoblacio()));
+            pstmt.setString(2, escola.getNom());
+            pstmt.setString(3, escola.getAproximacio());
+            pstmt.setInt(4, escola.getId());
+            pstmt.setString(5, escola.getPopularitat());
+            pstmt.setString(6, escola.getRestriccions());
+            pstmt.setInt(7, escola.getId());
+            pstmt.executeUpdate();
     }
 
     public void delete(Integer id) throws SQLException {

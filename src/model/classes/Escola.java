@@ -9,6 +9,7 @@ public class Escola {
     private String popularitat;
     private String restriccions;
 
+    // Constructor para crear escuelas
     public Escola(String poblacio, String nom, String aproximacio, String popularitat, String restriccions) {
         this.poblacio = poblacio;
         this.nom = nom;
@@ -18,6 +19,7 @@ public class Escola {
         this.restriccions = restriccions;
     }
 
+    // Constructor para leer escuelas
     public Escola(String poblacio, String nom, String aproximacio, int num_vies, String popularitat, String restriccions) {
         this.poblacio = poblacio;
         this.nom = nom;
@@ -27,6 +29,7 @@ public class Escola {
         this.restriccions = restriccions;
     }
 
+    // Constructor para actualizar escuelas
     public Escola(int id, String poblacio, String nom, String aproximacio, String popularitat, String restriccions) {
         this.id = id;
         this.poblacio = poblacio;
@@ -34,6 +37,14 @@ public class Escola {
         this.aproximacio = aproximacio;
         this.popularitat = popularitat;
         this.restriccions = restriccions;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPoblacio() {
