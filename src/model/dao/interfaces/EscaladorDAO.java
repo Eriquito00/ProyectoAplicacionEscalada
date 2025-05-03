@@ -6,6 +6,6 @@ import model.dao.DAO;
 import java.sql.SQLException;
 
 public interface EscaladorDAO extends DAO<Escalador,Integer> {
-    public int getEscaladorIdByNom(String nom) throws SQLException;
-    public boolean existeEscalador(String alies);
+    int getEscaladorIdByNom(String nom) throws SQLException;
+    boolean existeEscalador(String alies);
 }

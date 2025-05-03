@@ -35,7 +35,6 @@ public class MySQLAncoratgeDAO {
                 return -1; // Ancoratge no trobat
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return -1; // Error en la consulta
         }
     }

@@ -34,7 +34,6 @@ public class MySQLViaDAO implements ViaDAO {
 
         }
         catch (SQLException e) {
-            e.printStackTrace();
             return -1; // Error en la consulta
         }
     }
@@ -55,7 +54,6 @@ public class MySQLViaDAO implements ViaDAO {
                 return -1; // Via no trobada
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return -1; // Error en la consulta
         }
     }
@@ -77,7 +75,6 @@ public class MySQLViaDAO implements ViaDAO {
                 return null; // Via no trobada
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return null; // Error en la consulta
         }
     }
@@ -94,7 +91,6 @@ public class MySQLViaDAO implements ViaDAO {
             ResultSet rs = pstmt.executeQuery();
             return rs.next(); // Si hi ha resultats, la via existeix
         } catch (SQLException e) {
-            e.printStackTrace();
             return false; // Error en la consulta
         }
     }
@@ -338,6 +334,11 @@ public class MySQLViaDAO implements ViaDAO {
 
     @Override
     public void update(Via o) throws SQLException {
+        String queryentorn = "SELECT @a := estat FROM vies WHERE via_id = ?";
+        PreparedStatement pstmtent = conn.prepareStatement(queryentorn);
+        pstmtent.setInt(1,o.getId());
+        pstmtent.executeQuery();
+
         String query = "UPDATE vies SET " +
                         "ancoratge_id = ?, " +
                         "tipus_roca_id = ?, " +
@@ -346,11 +347,10 @@ public class MySQLViaDAO implements ViaDAO {
                         "numero_via = ?, " +
                         "orientacio = ?, " +
                         "estat = ?, " +
-                        "ultim_apte = CASE WHEN estat = \"apte\" AND (SELECT estat FROM vies WHERE via_id = ?) != apte THEN CURDATE() ELSE null END " +
+                        "ultim_apte = CASE WHEN estat = \"apte\" AND @a != \"apte\" THEN CURDATE() ELSE null END " +
                         "WHERE via_id = ?";
 
         PreparedStatement pstmt = conn.prepareStatement(query);
-        MySQLSectorDAO mySQLSectorDAO = new MySQLSectorDAO(conn);
 
         //Update ancoratge
         int ancoratgeId = new MySQLAncoratgeDAO(conn).getAncoratgeIdByNom(o.getAncoratge());
@@ -378,7 +378,6 @@ public class MySQLViaDAO implements ViaDAO {
         pstmt.setString(6, o.getOrientacio());
         pstmt.setString(7, o.getEstat());
         pstmt.setInt(8, o.getId());
-        pstmt.setInt(9, o.getId());
         pstmt.executeUpdate();
     }
 

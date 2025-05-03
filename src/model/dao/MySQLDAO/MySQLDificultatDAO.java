@@ -51,7 +51,6 @@ public class MySQLDificultatDAO {
                 return null; // Dificultat no trobada
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return null; // Error en la consulta
         }
     }

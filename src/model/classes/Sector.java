@@ -40,9 +40,11 @@ public class Sector {
         this.nom = nom;
         this.latitud = latitud;
         this.longitud = longitud;
-        this.aproximacio = aproximacio;
+        if (aproximacio == null) this.aproximacio = "";
+        else this.aproximacio = aproximacio;
         this.popularitat = popularitat;
-        this.restriccions = restriccions;
+        if (restriccions == null) this.restriccions = "";
+        else this.restriccions = restriccions;
     }
 
     public int getId() {

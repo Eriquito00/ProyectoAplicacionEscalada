@@ -24,7 +24,6 @@ public class MySQLTipusRocaDAO {
                 return -1; // Tipus de roca no trobat
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return -1; // Error en la consulta
         }
     }

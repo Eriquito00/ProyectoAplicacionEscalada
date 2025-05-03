@@ -1,7 +1,6 @@
 package model.dao.MySQLDAO;
 
 import model.classes.Tram;
-import model.classes.Via;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -14,7 +14,6 @@ public class MySQLPoblacionsDAO {
     }
 
     public int getIdPoblacioByNom(String nom) {
-        // Implementar la lógica para obtener el ID de la población por su nombre
         String query = "SELECT poblacio_id FROM poblacions WHERE nom = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -26,7 +25,6 @@ public class MySQLPoblacionsDAO {
                 return -1; // Població no trobada
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return -1; // Error en la consulta
         }
     }

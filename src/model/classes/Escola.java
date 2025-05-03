@@ -34,9 +34,11 @@ public class Escola {
         this.id = id;
         this.poblacio = poblacio;
         this.nom = nom;
-        this.aproximacio = aproximacio;
+        if (aproximacio == null) this.aproximacio = "";
+        else this.aproximacio = aproximacio;
         this.popularitat = popularitat;
-        this.restriccions = restriccions;
+        if (restriccions == null) this.restriccions = "";
+        else this.restriccions = restriccions;
     }
 
     public int getId() {

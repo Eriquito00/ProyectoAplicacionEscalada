@@ -51,7 +51,8 @@ public class Main {
             catch (SQLException e){
                 seguir = false;
                 View.mostrarMsg("Error en la conexion con la base de datos.");
-                //BORRAR LUEGO
+            }
+            catch (RuntimeException e) {
                 View.mostrarMsg(e.getMessage());
             }
         }

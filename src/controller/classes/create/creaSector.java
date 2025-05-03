@@ -13,12 +13,10 @@ public class creaSector {
     public static void creaSector(Scanner s, Connection c) throws SQLException {
         MySQLSectorDAO sec = new MySQLSectorDAO(c);
         String escola = demanaString(s,50,"Introduce el nombre de la escuela de la via.");
-        //Comprovar que la escuela existe
         String nom = demanaString(s,50,"Introduce el nombre del sector.");
-        //Comprobar que el nombre del sector no existe
-        String latitud = demanaString(s, 20,"Introduce la latitud del sector,");
+        String latitud = demanaString(s, 20,"Introduce la latitud del sector.", "Por ejemplo: '90º40'20\"N o S'.");
         if (!comprobaLatitud(latitud)) throw new InputMismatchException("El formato de la latitud no es correcto.");
-        String longitud = demanaString(s, 20,"Introduce la longitud del sector.");
+        String longitud = demanaString(s, 20,"Introduce la longitud del sector.", "Por ejemplo: '180º40'20\"E o O'.");
         if (!comprobaLongitud(longitud)) throw new InputMismatchException("El formato de la longitud no es correcto.");
         String aproximacio = demanaString(s, 100,"Introduce la aproximacion del sector.");
         int num_vies = 0;

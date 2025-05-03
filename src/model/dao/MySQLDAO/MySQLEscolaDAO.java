@@ -22,7 +22,7 @@ public class MySQLEscolaDAO implements EscolaDAO {
      * @return true si existeix, false si no
      * @throws SQLException Error en la consulta
      */
-    public boolean existeEscola(String nom) throws SQLException {
+    public boolean existeEscola(String nom) {
         String query = "SELECT COUNT(escola_id) AS num_escoles " +
                        "FROM escoles " +
                        "WHERE nom = ?";
@@ -36,7 +36,6 @@ public class MySQLEscolaDAO implements EscolaDAO {
                 return false; // Escola no trobada
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return false; // Error en la consulta
         }
     }
@@ -47,7 +46,7 @@ public class MySQLEscolaDAO implements EscolaDAO {
      * @return ID de l'escola o -1 si no existeix
      * @throws SQLException Error en la consulta
      */
-    public int getEscolaIdByNom(String nom) throws SQLException {
+    public int getEscolaIdByNom(String nom) {
         String query = "SELECT escola_id FROM escoles WHERE nom = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -59,7 +58,6 @@ public class MySQLEscolaDAO implements EscolaDAO {
                 return -1; // Escola no trobada
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return -1; // Error en la consulta
         }
     }
@@ -89,16 +87,10 @@ public class MySQLEscolaDAO implements EscolaDAO {
             throw new SQLException("La connexió a la base de dades és null");
         }
 
-        // Implementar la lógica para crear una nueva escuela en la base de datos
-        // Hace falta comprovar que la poblacio de la escola existe en la bbdd
         int poblacioId = new MySQLPoblacionsDAO(conn).getIdPoblacioByNom(escola.getPoblacio());
-        // Si la poblacio no existeix, llançar una excepció
         if (poblacioId == -1) throw new SQLException("La població no existeix a la base de dades");
 
-        // Si la poblacio existeix, continuar amb la inserció
         String query = "INSERT INTO escoles (poblacio_id, nom, aproximacio, num_vies, popularitat, restriccions) VALUES (?, ?, ?, ?, ?, ?)";
-
-        // Preparar la consulta SQL
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setInt(1, poblacioId);
         pstmt.setString(2, escola.getNom());
@@ -118,7 +110,6 @@ public class MySQLEscolaDAO implements EscolaDAO {
             pstmt.setString(6, escola.getRestriccions());
         }
 
-        // Ejecutar la consulta
         pstmt.executeUpdate();
     }
 
@@ -154,22 +145,29 @@ public class MySQLEscolaDAO implements EscolaDAO {
     }
 
     public void update(Escola escola) throws SQLException {
-        String query = "UPDATE escoles SET poblacio_id = ?, nom = ?, aproximacio = ?, " +
-                        "num_vies = (SELECT COUNT(via_id) FROM vies v INNER JOIN sectors s ON s.sector_id = v.sector_id " +
-                                    "INNER JOIN escoles e ON s.escola_id = e.escola_id WHERE e.escola_id = ?), " +
-                        "popularitat = ?, restriccions = ? WHERE escola_id = ?";
+        String queryentorn = "SELECT @cuantas := COUNT(via_id)" +
+                " FROM vies v" +
+                " INNER JOIN sectors s ON s.sector_id = v.sector_id" +
+                " INNER JOIN escoles e ON s.escola_id = e.escola_id" +
+                " WHERE e.escola_id = ?";
+        PreparedStatement pstmtentorn = conn.prepareStatement(queryentorn);
+        pstmtentorn.setInt(1,escola.getId());
+        pstmtentorn.executeQuery();
+
+        String query = "UPDATE escoles " +
+                        " SET poblacio_id = ?, nom = ?, aproximacio = ?, " +
+                        " num_vies = @cuantas, " +
+                        " popularitat = ?, restriccions = ? WHERE escola_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
-            // Comprovar que la poblacio existeix a la base de dades
             if (new MySQLPoblacionsDAO(conn).getIdPoblacioByNom(escola.getPoblacio()) == -1) {
                 throw new SQLException("La població no existeix a la base de dades");
             }
             pstmt.setInt(1, new MySQLPoblacionsDAO(conn).getIdPoblacioByNom(escola.getPoblacio()));
             pstmt.setString(2, escola.getNom());
             pstmt.setString(3, escola.getAproximacio());
-            pstmt.setInt(4, escola.getId());
-            pstmt.setString(5, escola.getPopularitat());
-            pstmt.setString(6, escola.getRestriccions());
-            pstmt.setInt(7, escola.getId());
+            pstmt.setString(4, escola.getPopularitat());
+            pstmt.setString(5, escola.getRestriccions());
+            pstmt.setInt(6, escola.getId());
             pstmt.executeUpdate();
     }
 

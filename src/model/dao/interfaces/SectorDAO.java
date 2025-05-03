@@ -6,8 +6,8 @@ import model.dao.DAO;
 import java.sql.SQLException;
 
 public interface SectorDAO extends DAO<Sector,Integer> {
-    public int getNumVies(int idEscola) throws SQLException;
-    public int getSectorIdByNom(String nom) throws SQLException;
-    public String getEscola(String sector) throws SQLException;
-    public Boolean sectorExists(String nom, String escola) throws SQLException;
+    int getNumVies(int idEscola) throws SQLException;
+    int getSectorIdByNom(String nom) throws SQLException;
+    String getEscola(String sector) throws SQLException;
+    Boolean sectorExists(String nom, String escola) throws SQLException;
 }

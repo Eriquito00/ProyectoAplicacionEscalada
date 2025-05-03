@@ -51,16 +51,16 @@ INSERT INTO escoles (poblacio_id, nom, aproximacio, num_vies, popularitat, restr
 
 -- Insertar datos en la tabla sectors
 INSERT INTO sectors (escola_id, nom, latitud, longitud, aproximacio, num_vies, popularitat, restriccions) VALUES
-(1, "Vinya Nova", "41.591", "1.825", "5 min a peu des de l'aparcament", 15, "alta", NULL),
-(2, "Collbato", "41.563", "1.832", "10 min a peu", 12, "mitjana", NULL),
-(3, "Can Piqui Pugui", "41.333", "1.233", "10 min a peu", 20, "alta", NULL),
-(4, "El Pati", "41.342", "1.245", "5 min a peu", 30, "alta", NULL),
-(5, "Bovedas de Rodellar", "42.324", "0.123", "20 min a peu", 25, "alta", NULL);
+(1, "Vinya Nova", "90º40'20\"N", "180º42'25\"E", "5 min a peu des de l'aparcament", 15, "alta", NULL),
+(2, "Collbato", "50º20'25\"N", "180º25'48\"O", "10 min a peu", 12, "mitjana", NULL),
+(3, "Can Piqui Pugui", "80º45'42\"S", "150º56'28\"O", "10 min a peu", 20, "alta", NULL),
+(4, "El Pati", "70º35'54\"S", "130º45'58\"E", "5 min a peu", 30, "alta", NULL),
+(5, "Bovedas de Rodellar", "65º62'33\"N", "110º2'8\"O", "20 min a peu", 25, "alta", NULL);
 
 -- Insertar datos en la tabla escaladors
 INSERT INTO escaladors (nom, alies, edat, nivell_max, nom_via_max, tipus_fav, fita) VALUES
-("Jordi Climber", "JordiC", 32, "8b+", "La Fissura del Temps", "Classica", "Ascensio al Pic Central en solo integral"),
-("Miquel Roca", "MikiRocks", 28, "7c", "El Cami dels Somnis", "Esportiva", "Primer 7c a vista"),
+("Jordi Climber", "JordiC", 32, "8b+", "El repte vertical", "Classica", "Ascensio al Pic Central en solo integral"),
+("Miquel Roca", "MikiRocks", 28, "7c", "Colmillos de hielo", "Esportiva", "Primer 7c a vista"),
 ("Laura Puig", "LauriP", 25, "8a", "Somnis de Pedra", "Esportiva", "Primer 8a encadenat"),
 ("Pere Gel", "IceMan", 35, "WI6", "Cascada de Cristall", "Gel", "Primera ascensio hivernal en solitari"),
 ("Sonia Valls", "SoniV", 29, "7b+", "Diedre Oblicu", "Classica", "Gran ascensio en paret de 300m");

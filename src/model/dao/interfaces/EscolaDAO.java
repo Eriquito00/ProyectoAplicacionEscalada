@@ -6,6 +6,6 @@ import model.dao.DAO;
 import java.sql.SQLException;
 
 public interface EscolaDAO extends DAO<Escola,Integer> {
-    public boolean existeEscola(String escolaNom) throws SQLException;
-    public int getEscolaIdByNom(String escolaNom) throws SQLException;
+    boolean existeEscola(String escolaNom) throws SQLException;
+    int getEscolaIdByNom(String escolaNom) throws SQLException;
 }

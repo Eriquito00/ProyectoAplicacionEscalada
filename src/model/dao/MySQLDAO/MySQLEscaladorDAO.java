@@ -37,7 +37,6 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
                 return -1; // Escalador no trobat
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return -1; // Error en la consulta
         }
     }
@@ -55,7 +54,6 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
             ResultSet rs = pstmt.executeQuery();
             return rs.next(); // Si hi ha resultats, l'escalador existeix
         } catch (SQLException e) {
-            e.printStackTrace();
             return false; // Error en la consulta
         }
     }
@@ -140,9 +138,7 @@ public class MySQLEscaladorDAO implements EscaladorDAO {
         pstmt.setString(2, o.getAlies());
         pstmt.setInt(3, o.getEdad());
         String dificultat = new MySQLViaDAO(conn).getDificultatByNom(o.getNombre_via_max(), o.getEscola_via_max());
-        if (dificultat == null) {
-            throw new SQLException("La via no existeix a la base de dades");
-        }
+        if (dificultat == null) throw new SQLException("La via del escalador y no pertenece a la escuela introducida.");
         pstmt.setString(4, dificultat);
         pstmt.setString(5, o.getNombre_via_max());
         pstmt.setString(6, o.getTipo_favorito());

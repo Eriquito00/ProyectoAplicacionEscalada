@@ -118,18 +118,16 @@ public class Escalador {
     @Override
     public String toString() {
         return String.format(
-                        "%-15s %-60s\n" +
-                        "%-15s %-60s\n" +
-                        "%-15s %-5s\n" +
-                        "%-15s %-60s\n" +
-                        "%-15s %-60s\n" +
-                        "%-15s %-15s\n" +
-                        "%-15s %-110s\n",
+                        "%-20s %-60s\n" +
+                        "%-20s %-60s\n" +
+                        "%-20s %-5s\n" +
+                        "%-20s %-60s\n" +
+                        "%-20s %-15s\n" +
+                        "%-20s %-110s\n",
                 "Nom:", nom,
                 "Alies:", alies,
                 "Edad:", edad,
                 "Nombre via max:", nombre_via_max,
-                "Escuela via max:", escola_via_max,
                 "Tipo favorito:", tipo_favorito,
                 "Fita:", fita
         );

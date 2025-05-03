@@ -16,9 +16,7 @@ public class MySQLSectorDAO implements SectorDAO {
         this.conn = conn;
     }
 
-    public int getNumVies(int idEscola) {
-        return 0; // TODO: Hace falta implementar una query para obtener el numero de vias de el sector que se le pase por parametro
-    }
+    public int getNumVies(int idEscola) {return 0;}
 
     /**
      * Comprovar si un sector existeix a la base de dades
@@ -37,7 +35,6 @@ public class MySQLSectorDAO implements SectorDAO {
                 return -1; // Sector no trobat
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return -1; // Error en la consulta
         }
     }
@@ -153,7 +150,7 @@ public class MySQLSectorDAO implements SectorDAO {
 
     @Override
     public void update(Sector o)  throws SQLException {
-        String query = "UPDATE sectors SET escola_id = ?, nom = ?, latitud = ?, longitud = ?, aproximacio = ?, num_vies = (SELECT COUNT(via_id) FROM vies v WHERE s.sector_id = ?), popularitat = ?, restriccions = ? WHERE sector_id = ?";
+        String query = "UPDATE sectors SET escola_id = ?, nom = ?, latitud = ?, longitud = ?, aproximacio = ?, num_vies = (SELECT COUNT(via_id) FROM vies v WHERE v.sector_id = ?), popularitat = ?, restriccions = ? WHERE sector_id = ?";
         PreparedStatement pstmt = conn.prepareStatement(query);
         int escolaId = new MySQLEscolaDAO(conn).getEscolaIdByNom(o.getEscola());
         if (escolaId == -1) throw new SQLException("La escola indicada no existeix a la base de dades");
@@ -187,5 +184,4 @@ public class MySQLSectorDAO implements SectorDAO {
         pstmt.setInt(1,id);
         pstmt.executeUpdate();
     }
-
 }

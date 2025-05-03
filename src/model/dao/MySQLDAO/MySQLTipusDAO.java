@@ -31,7 +31,6 @@ public class MySQLTipusDAO {
                 return -1; // Tipus no trobat
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             return -1; // Error en la consulta
         }
     }
